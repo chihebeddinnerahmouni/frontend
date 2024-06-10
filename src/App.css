@@ -12,6 +12,9 @@ body {
 font-family: "Rubik", sans-serif;
 }
 
+.buttomShadow {
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
 
 .sticky_header {
 width: 100%;
@@ -229,6 +232,29 @@ th, td {
   content: "ON";
   color: #fff;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

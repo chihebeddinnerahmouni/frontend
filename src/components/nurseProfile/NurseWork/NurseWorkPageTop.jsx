@@ -39,7 +39,7 @@ const switchStateRef = useRef(null);
 
 
   return (
-<div className="top relative z-20 bg-white shadow-shadowPanel rounded-br-20 rounded-bl-20 px-5 flex justify-between items-center py-2 mx-4">
+<div className="top relative z-20 bg-white shadow-panelShadow rounded-br-20 rounded-bl-20 px-5 flex justify-between items-center py-2 mx-4">
         <span className="font-[500] text-darkGreen4">Appointment</span>
         <span ref={switchStateRef} onClick={switchStateButton}>
         <label className="toggle-btn">

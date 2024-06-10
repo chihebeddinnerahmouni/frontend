@@ -18,11 +18,10 @@ const NurseInfosPage = () => {
   if (!nurseData) return <p>loading...</p>;
   console.log(nurseData);
   let image = convertToLocalServerPath(nurseData.profilePicture);
-  console.log(image);
 
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen fade-in">
        {/*  <img src={image} className="w-full" />*/} 
         <div className="image w-full h-[400px]" style={{ backgroundImage: `url(${encodeURI(image)})`, backgroundSize:'cover', backgroundPosition:'center' }}>
 

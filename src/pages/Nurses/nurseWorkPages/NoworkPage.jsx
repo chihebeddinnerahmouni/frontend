@@ -3,7 +3,7 @@ import React from "react";
 const NoworkPage = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-40">
+      <div className="flex flex-col items-center justify-center mt-40 px-4 fade-in">
         <span className="font-[500] text-darkGreen4 text-2xl">
           You want to work ?
         </span>

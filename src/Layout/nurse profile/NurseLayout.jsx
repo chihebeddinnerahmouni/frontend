@@ -27,7 +27,7 @@ useEffect(() => {
 
   return (
     <NurseDataContext.Provider value={{ nurseData, setNurseData }}>
-      <div className="main relative fade-in">
+      <div className="main relative">
         <main>
           {children}
         </main>

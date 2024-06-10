@@ -42,6 +42,7 @@ export const theme = {
     },
     borderWidth: {
       3: "3px",
+      1: "1px"
     },
     fontFamily: {
       'rubik': ["Rubik", "sans-serif"],

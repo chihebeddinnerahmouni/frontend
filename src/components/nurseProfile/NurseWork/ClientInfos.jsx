@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ClientInfos = () => {
   return (
-      <div className="clientInfos w-full flex items-center justify-between mt-3">
+      <div className="clientInfos w-full flex items-center justify-between">
           
           <div className="infos flex gap-2">
           <img src={image} className='w-[50px] rounded-[10px]' /><div className="nameRate">

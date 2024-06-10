@@ -6,7 +6,7 @@ const
   NurseWorkLayout = ({ children }) => {
     return (
       <>
-        <div className="main bg-creme min-h-screen fade-in">
+        <div className="main bg-creme min-h-screen">
       <NurseWorkPageTop />
             <main>
                 {children}

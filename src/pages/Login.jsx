@@ -36,7 +36,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.token);
         if (response.data.user.type === "doctor") navigate("/docprofile");
         if (response.data.user.type === "patient") navigate("/userProfile");
-        if (response.data.user.type === "nurse") navigate("/NurseProfile");
+        if (response.data.user.type === "nurse") navigate("/Nurse-Profile");
       }
       
     }).catch((error) => {
