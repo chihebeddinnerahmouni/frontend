@@ -40,7 +40,7 @@ return (
 <Route path="/docProfile" element={<ProfileLayout type="PROFILE"><ProfileInfos /></ProfileLayout>} />
 <Route path="/schedules" element={<ProfileLayout type="SCHEDULES"><SchedulesPage /></ProfileLayout>} />
 {/* nurses */}
-<Route path="/Nurse-Profile" element={<NurseLayout><NurseInfosPage /></NurseLayout>} />
+<Route path="/Nurse-Profile" element={<NurseWorkLayout><NurseInfosPage /></NurseWorkLayout>} />
 <Route path="/Nurse-noWork" element={<NurseWorkLayout><NoworkPage  /></NurseWorkLayout>} />
 <Route path="/Nurse-recieving" element={<NurseWorkLayout><RecievingRequest  /></NurseWorkLayout>} />
 <Route path="/Nurse-accepting" element={<NurseWorkLayout><AcceptingWork /></NurseWorkLayout>} />
