@@ -20,12 +20,12 @@ const UserButtomNavBar = () => {
             },
             {
             title: 'ask for nurse',
-            path: '/user/asking',
+            path: '/user-asking',
             icon: <FontAwesomeIcon icon={faCalendar} />
             },
             {
             title: 'Profile',
-            path: '/userProfile',
+            path: '/User-Profile',
             icon: <FontAwesomeIcon icon={faUser} />
             },
 

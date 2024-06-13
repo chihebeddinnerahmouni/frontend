@@ -14,6 +14,7 @@ const RecievingRequest = () => {
   console.log("requestData", requestData);
   const navigate = useNavigate();
   const [service, setService] = useState("");
+  const [subService, setSubService] = useState("");
   const [distance, setDistance] = useState("");
   const [price, setPrice] = useState("");
   const [patient, setPatient] = useState("");
@@ -22,6 +23,7 @@ const RecievingRequest = () => {
   useEffect(() => {
     if (requestData) {
       setService(requestData[0].service);
+      setSubService(requestData[0].subService);
       setDistance(requestData[0].distance);
       setPrice(requestData[0].price);
       setPatient(requestData[0].patient);
@@ -58,6 +60,7 @@ const RecievingRequest = () => {
         <div className="bg-creme2 relative z-2 w-full flex-grow rounded-tl-20 rounded-tr-20 shadow-panelShadow mt-[320px] px-4 pt-3 pb-[70px] flex flex-col items-center">
           <hr className="border-t-[3px] border-darkGreen2 w-[70px] rounded-50" />
           <span className=" mt-4 text-darkGreen2 font-[600]">{service}</span>
+          <span className=" mt-1 text-writingGrey">{subService}</span>
           <span className="mt-4"><Distance Distance={distance} /></span>
           <hr className=" w-full my-6 mb-8" />
           <CheckClientAndPrice price={price} patient={patient} patientRate={patientRate} />

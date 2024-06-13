@@ -35,7 +35,7 @@ const Login = () => {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         if (response.data.user.type === "doctor") navigate("/docprofile");
-        if (response.data.user.type === "patient") navigate("/userProfile");
+        if (response.data.user.type === "patient") navigate("/User-Profile");
         if (response.data.user.type === "nurse") navigate("/Nurse-Profile");
       }
       

@@ -11,7 +11,6 @@ import ProfileInfos from "../pages/Doctors/ProfileInfos";
 import DoctorDetails from "../pages/Doctors/DoctorsDetails";
  import SchedulesPage from "../pages/Doctors/SchedulesPage";
 import { Routes, Route } from "react-router-dom";
-import NurseLayout from "../Layout/nurse profile/NurseLayout";
 import NurseInfosPage from "../pages/Nurses/NurseInfosPage";
 import AcceptingWork from "../pages/Nurses/nurseWorkPages/acceptingWork";
 import NurseWorkLayout from "../Layout/nurse profile/NurseWorkLayout";
@@ -20,9 +19,10 @@ import RecievingRequest from "../pages/Nurses/nurseWorkPages/RecievingRequest";
 import EndWork from "../pages/Nurses/nurseWorkPages/EndWork";
 //user
 import UserLayout from "../Layout/UserLayout";
-import UserProfileInfos from "../pages/User/UserProfileInfos";
-import AskingForNurse from "../pages/User/AskingForNurse";
-import SetPosition from "../pages/User/SetPosition";
+import UserProfileInfos from "../pages/User/UserProfileInfosPage";
+import AskingForNurse from "../pages/User/AskingForNursePage";
+import SetPosition from "../pages/User/SetPositionPage";
+import NearbyNurses from "../pages/User/NearbyNursesPage";
 
 
 const Routers = ()=>{
@@ -46,9 +46,10 @@ return (
 <Route path="/Nurse-accepting" element={<NurseWorkLayout><AcceptingWork /></NurseWorkLayout>} />
 <Route path="/Nurse-endWork" element={<NurseWorkLayout><EndWork /></NurseWorkLayout>} />
 {/* user */}
-<Route path="/userProfile" element={<UserLayout><UserProfileInfos /></UserLayout>} />
-<Route path="/user/asking" element={<UserLayout><AskingForNurse /></UserLayout>} />
-<Route path="/user/set-position" element={<UserLayout><SetPosition /></UserLayout>} />
+<Route path="/User-Profile" element={<UserLayout><UserProfileInfos /></UserLayout>} />
+<Route path="/User-asking" element={<UserLayout><AskingForNurse /></UserLayout>} />
+<Route path="/User-set-position" element={<UserLayout><SetPosition /></UserLayout>} />
+<Route path="/User-nearbyNurses" element={<UserLayout><NearbyNurses /></UserLayout>} />
 </Routes>
 );
 };

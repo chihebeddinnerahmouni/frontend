@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import { UserDataContext } from '../../../Layout/UserLayout'
 
-const SelectService = ({ selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices }) => {
+
+
+const SelectService = () => {
     
     const services = {
-    'Service 1': ['Sub Service 1.1', 'Sub Service 1.2', 'Sub Service 1.3'],
-    'Service 2': ['Sub Service 2.1', 'Sub Service 2.2', 'Sub Service 2.3'],
-    'Service 3': ['Sub Service 3.1', 'Sub Service 3.2', 'Sub Service 3.3'],
-    };
+  'General Care': ['Wound dressing', 'Injections', 'Health monitoring'],
+  'Specialized Care': ['Diabetes management', 'Cardiac care', 'Respiratory care'],
+  'Home Care': ['Meal preparation', 'Medication management', 'Personal hygiene care'],
+  'Pediatric Care': ['Newborn care', 'Child health check', 'Vaccination'],
+  'Elderly Care': ['Dementia care', 'Mobility assistance', 'Companionship']
+};
+  
+  const { selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
     
         useEffect(() => {
     if (selectedService && services[selectedService]) {
       setSubServices(services[selectedService]);
+      setSelectedSubService()
     } else {
       setSubServices([]);
     }
