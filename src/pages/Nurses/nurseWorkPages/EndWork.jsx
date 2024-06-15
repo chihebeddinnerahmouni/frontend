@@ -1,7 +1,8 @@
 import React from 'react';
 //import image from '../../../assets/images/Wavy_Bus-05_Single-01.jpg'
 //import image from '../../../assets/images/main a main.png'
-import image from '../../../assets/images/Pngtree—vector payment icon_3782887.png'
+//import image from '../../../assets/images/Pngtree—vector payment icon_3782887.png'
+import image from '../../../assets/images/sward.png'
 import ServiceDetails from '../../../components/nurseProfile/NurseWork/ServiceDetails';
 import { faRoad, faClock, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 

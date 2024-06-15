@@ -23,6 +23,8 @@ import UserProfileInfos from "../pages/User/UserProfileInfosPage";
 import AskingForNurse from "../pages/User/AskingForNursePage";
 import SetPosition from "../pages/User/SetPositionPage";
 import NearbyNurses from "../pages/User/NearbyNursesPage";
+import ServiceEnd from "../pages/User/ServiceEndPage";
+import ThankYouPage from "../pages/User/ThankYouPage";
 
 
 const Routers = ()=>{
@@ -49,7 +51,9 @@ return (
 <Route path="/User-Profile" element={<UserLayout><UserProfileInfos /></UserLayout>} />
 <Route path="/User-asking" element={<UserLayout><AskingForNurse /></UserLayout>} />
 <Route path="/User-set-position" element={<UserLayout><SetPosition /></UserLayout>} />
-<Route path="/User-nearbyNurses" element={<UserLayout><NearbyNurses /></UserLayout>} />
+<Route path="/User-nearby-nurses" element={<UserLayout><NearbyNurses /></UserLayout>} />
+<Route path="/User-service-end" element={<UserLayout><ServiceEnd /></UserLayout>} />
+<Route path="/User-thanks" element={<UserLayout><ThankYouPage /></UserLayout>} />
 </Routes>
 );
 };

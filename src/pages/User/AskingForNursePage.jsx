@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import map from '../../assets/images/map.jpg';
 import medicalPic from '../../assets/images/medical-image3.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const AskingForNurse = () => {
 
   const navigate = useNavigate();
-  
+
+
   const askNurse = () => { 
     navigate("/user-set-position");
+    //localStorage.setItem('currentStep', '/User-set-position');
   }
 
 

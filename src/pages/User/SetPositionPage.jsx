@@ -12,10 +12,9 @@ import { useNavigate } from 'react-router-dom';
 
 const SetPosition = () => {
 
-  const { userLocation, setUserLocation, selectedService, selectedSubService, setNurseList } = useContext(UserDataContext);
+  const { userLocation, setUserLocation, selectedService, selectedSubService, setNurseList, setResStatus } = useContext(UserDataContext);
   const [isValidLocation, setIsValidLocation] = useState(false);
   const navigate = useNavigate();
-
 
     useEffect(() => {
     setIsValidLocation(userLocation && userLocation.length > 0);
@@ -23,7 +22,8 @@ const SetPosition = () => {
   
   //get NearBy nurses button
   const nearbyNurses = () => { 
-    navigate ("/User-nearbyNurses")
+    console.log("wow");
+    //localStorage.setItem('currentStep', '/User-nearbyNurses');
     const token = localStorage.getItem('token');
     axios.post('http://localhost:3000/patients/profile/nearby-nurses', {
       userLocation: userLocation,
@@ -34,8 +34,10 @@ const SetPosition = () => {
         Authorization: `Bearer ${token}`
       }
     }).then(res => {
+      console.log(res);
       setNurseList(res.data.nurseList);
-      navigate("/User-nearbyNurses");
+      setResStatus(res.data.status);
+      navigate("/User-nearby-nurses");
     }).catch(err => {
       console.log(err);
     })

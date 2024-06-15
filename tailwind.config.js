@@ -48,6 +48,7 @@ export const theme = {
       'rubik': ["Rubik", "sans-serif"],
       'roboto': ["Roboto", "sans-serif"],
       'rubikBubbles': ['"Rubik Bubbles"', "system-ui"],
+      'poppins': ['Poppins', 'sans-serif'],
     },
     boxShadow: {
       panelShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
@@ -58,6 +59,9 @@ export const theme = {
     fontWeight: {
       450: "450",
     },
+    backdropBlur: {
+        'custom': '124px'
+    }
   },
 };
 export const plugins = [];

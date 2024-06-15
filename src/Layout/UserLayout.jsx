@@ -1,5 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import UserButtomNavBar from '../components/UserProfile/UserButtomNavBar';
+import NearbyNurses from '../pages/User/NearbyNursesPage';
+
 
 export const UserDataContext = createContext();
 
@@ -10,18 +12,19 @@ const UserLayout = ({ children }) => {
   const [selectedService, setSelectedService] = useState();
   const [selectedSubService, setSelectedSubService] = useState();
   const [subServices, setSubServices] = useState([]);
-  const [nurselist, setNurseList] = useState();
+  const [nurseList, setNurseList] = useState();
   const [nurseRequestName, setNurseRequestName] = useState();
-
+  const [acceptedRequest, setAcceptedRequest] = useState(false);
+  const [resStatus, setResStatus] = useState();
 
   
 
 
   return (
     <div>
-      <UserDataContext.Provider value={{userData, setUserData, userLocation, setUserLocation, selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices, nurselist , setNurseList,nurseRequestName ,setNurseRequestName}}>
+      <UserDataContext.Provider value={{userData, setUserData, userLocation, setUserLocation, selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices, nurseList , setNurseList,nurseRequestName ,setNurseRequestName,acceptedRequest ,setAcceptedRequest,resStatus ,setResStatus  }}>
           <main>
-          {children}
+            {children}
           </main>
         <UserButtomNavBar />
       </UserDataContext.Provider>

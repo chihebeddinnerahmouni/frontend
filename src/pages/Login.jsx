@@ -34,6 +34,7 @@ const Login = () => {
     }).then((response) => {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userName", response.data.user.name);
         if (response.data.user.type === "doctor") navigate("/docprofile");
         if (response.data.user.type === "patient") navigate("/User-Profile");
         if (response.data.user.type === "nurse") navigate("/Nurse-Profile");
@@ -81,7 +82,8 @@ const Login = () => {
                 className="appearance-none rounded-none relative block w-full px-3 py-4 border-b-2 border-darkGreen1 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email or Name"
               />
-            </div>
+  </div>
+
             <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
