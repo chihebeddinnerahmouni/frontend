@@ -6,9 +6,9 @@ import { UserDataContext } from '../../../Layout/UserLayout';
 
 
 
-const NearByNurseComp = ({ nurseName, nurseRate, nurseLikes, nurseSpecialite, patientClients, profilePic, price }) => {
+const NearByNurseComp = ({ nurseName, nurseRate, nurseLikes, nurseSpecialite, patientClients, profilePic, price,   setNurseRequestName, nurseRequestName}) => {
     
-    const { setNurseRequestName, nurseRequestName } = useContext(UserDataContext);
+    //const {  } = useContext(UserDataContext);
 
     const selectNurse = () => {
         setNurseRequestName(nurseName);

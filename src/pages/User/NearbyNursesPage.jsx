@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserDataContext } from '../../Layout/UserLayout';
 import NearByNurseComp from '../../components/UserProfile/nearby nurses/NearByNurseComp';
 import image from '../../assets/images/doctor-img01.png'
@@ -14,16 +14,22 @@ import WaitForAccept from './WaitForAccept';
 
 const NearbyNurses = () => {
 
-    const nurseListt = [
+   /* const nurseListt = [
         { nurseName: "Affaf Aissaoui", nurseRate: 4.5,nurseLikes:80 ,nurseSpecialite: "kolch", patientClients: 90, profilePic: {image}, price: 500},
         { nurseName: "Djeloul Dali", nurseRate: 4.0, nurseLikes: 80, nurseSpecialite: "kolch thani", patientClients: 50, profilePic: {image2}, price: 500},
         { nurseName: "Djeloul Dali", nurseRate: 4.0, nurseLikes: 80, nurseSpecialite: "kolch thani", patientClients: 50, profilePic: {image2}, price: 500},
-    ];
+  ];*/
+  const { /*nurseRequestName,*/ acceptedRequest, nurseList } = useContext(UserDataContext);
 
-  const { nurseList, nurseRequestName, isWaiting, acceptedRequest } = useContext(UserDataContext);
+  const [isWaiting, setIsWaiting] = useState(true);
+  //const [acceptedRequest, setAcceptedRequest] = useState(true);
+  const [nurseRequestName, setNurseRequestName] = useState();
+  //const [serviceNurseData, setServiceNurseData] = useState({ nurseName: "Affaf Aissaoui", nurseRate: 4.5, nurseLikes: 80, nurseSpecialite: "kolch", patientClients: 90, price: 500 } );
+
+  //const nurseList = JSON.parse(sessionStorage.getItem('nurseList'));
 
   const sendRequest = () => {
-    console.log("way")
+    console.log("way") 
   }
 
 
@@ -36,7 +42,7 @@ const NearbyNurses = () => {
         <p className='text-writingGrey text-sm self-start mt-6'>Selectionner</p>    
         <div className="nearByNurses mt-2 flex flex-col w-full gap-2">
               {nurseList ? nurseList.map((nurse, index) => {
-                return <NearByNurseComp key={index} nurseName={nurse.nurseName} nurseRate={nurse.nurseRate} nurseLikes={nurse.nurseLikes} nurseSpecialite={nurse.nurseSpecialite} patientClients={nurse.patientClients} profilePic={nurse.profilePic} price={nurse.price} />
+                return <NearByNurseComp key={index} nurseName={nurse.nurseName} nurseRate={nurse.nurseRate} nurseLikes={nurse.nurseLikes} nurseSpecialite={nurse.nurseSpecialite} patientClients={nurse.patientClients} profilePic={nurse.profilePic} price={nurse.price} setNurseRequestName={setNurseRequestName} nurseRequestName={nurseRequestName}/>
               }) : <Loading />}  
         </div>
       </div>
@@ -49,7 +55,7 @@ const NearbyNurses = () => {
     </div>
 
     <div className={`acceptedRequest w-[300px] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ${isWaiting ? '' : 'hidden' }`}>
-        {acceptedRequest.state ? <AcceptedRequest data={acceptedRequest.nurseData} /> : <WaitForAccept />}
+        {acceptedRequest.status ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> : <WaitForAccept />}
     </div>
       
     </>

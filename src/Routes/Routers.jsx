@@ -26,6 +26,7 @@ import NearbyNurses from "../pages/User/NearbyNursesPage";
 import ServiceEnd from "../pages/User/ServiceEndPage";
 import ThankYouPage from "../pages/User/ThankYouPage";
 import NurseResultPage from "../pages/User/NurseResultPage";
+import TestPage from "../pages/User/TestPage";
 
 
 const Routers = ()=>{
@@ -55,6 +56,7 @@ return (
 <Route path="/User-result" element={<UserLayout><NurseResultPage /></UserLayout>} />
 <Route path="/User-service-end" element={<UserLayout><ServiceEnd /></UserLayout>} />
 <Route path="/User-thanks" element={<UserLayout><ThankYouPage /></UserLayout>} />
+<Route path="/User-test" element={<UserLayout><TestPage /></UserLayout>} />
 </Routes>
 );
 };

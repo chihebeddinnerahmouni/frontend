@@ -2,12 +2,12 @@ import React, {useContext} from 'react';
 import image from '../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
-import { UserDataContext } from '../../Layout/UserLayout';
+//import { UserDataContext } from '../../Layout/UserLayout';
 
 
-const AcceptedRequest = ({data}) => {
+const AcceptedRequest = ({data, setIsWaiting}) => {
 
-  const { setIsWaiting } = useContext(UserDataContext);
+  //const { setIsWaiting } = useContext(UserDataContext);
   
   const anotherNurse = () => { 
     setIsWaiting(false);

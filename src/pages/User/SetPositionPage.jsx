@@ -12,8 +12,12 @@ import { useNavigate } from 'react-router-dom';
 
 const SetPosition = () => {
 
-  const { userLocation, setUserLocation, selectedService, selectedSubService, setNurseList, setResStatus } = useContext(UserDataContext);
+  const { setResStatus, setNurseList } = useContext(UserDataContext);
   const [isValidLocation, setIsValidLocation] = useState(false);
+  const [userLocation, setUserLocation] = useState([]);
+  const [selectedService, setSelectedService] = useState();
+  const [selectedSubService, setSelectedSubService] = useState();
+  const [subServices, setSubServices] = useState([]);
   const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,8 +26,6 @@ const SetPosition = () => {
   
   //get NearBy nurses button
   const nearbyNurses = () => { 
-    
-    console.log("wow");
     navigate("/User-result");
     //localStorage.setItem('currentStep', '/User-nearbyNurses');
     const token = localStorage.getItem('token');
@@ -35,10 +37,11 @@ const SetPosition = () => {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).then(res => {
-      console.log(res);
-      setNurseList(res.data.nurseList);
+    }).then(res => {  
+      //sessionStorage.setItem('nurseList', JSON.stringify(res.data.nurseList));
+      //sessionStorage.setItem('resStatus', res.status);
       setResStatus(res.status);
+      setNurseList(res.data.nurseList);
     }).catch(err => {
       console.log(err);
     })
@@ -51,7 +54,7 @@ const SetPosition = () => {
       <p className='text-darkGreen2 font-[600] text-[20px]'>Personalise votre demande</p>
       
       <div className="service-position w-full px-8 buttomShadow mt-12 pb-8">
-        <SelectService />
+        <SelectService selectedService={selectedService} setSelectedService={setSelectedService} selectedSubService={selectedSubService} setSelectedSubService={setSelectedSubService} subServices={subServices} setSubServices={setSubServices}/>
         <div className="position mt-6 w-full relative flex items-center">
           <FontAwesomeIcon icon={faMapPin} className='absolute text-darkGreen4 left-4'/>
           <input type="text" placeholder='position' className='location appearance-none shadow-panelShadow rounded-20 text-sm py-2 pl-10 w-full outline-none text-darkGreen1 focus:ring-1 focus:ring-darkGreen4' value={userLocation || ''}  onChange={e => {
@@ -63,7 +66,7 @@ const SetPosition = () => {
 
       <div className="taht w-full px-8 pb-[80px] flex flex-col relative items-center gap-9 flex-1 justify-between">
           <div className="positionOptions mt-6 w-full ">
-            <PositionOptions />
+          <PositionOptions setUserLocation={setUserLocation} />
           </div>
 
         <div className={`terminer w-full text-creme2 py-3 text-center ${isValidLocation && selectedService && selectedSubService ? 'bg-darkGreen4' : 'bg-gray-400'} rounded-[10px]`}>

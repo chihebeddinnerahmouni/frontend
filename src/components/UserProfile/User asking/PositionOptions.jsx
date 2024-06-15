@@ -6,10 +6,10 @@ import { UserDataContext } from "../../../Layout/UserLayout";
 
 
 
-const PositionOptions = () => {
+const PositionOptions = ({setUserLocation}) => {
 
   const [selectedOption, setSelectedOption] = useState();
-  const { setUserLocation } = useContext(UserDataContext);
+  //const { setUserLocation } = useContext(UserDataContext);
 
 
   const option1 = () => { 

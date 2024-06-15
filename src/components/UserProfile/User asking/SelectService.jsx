@@ -3,7 +3,7 @@ import { UserDataContext } from '../../../Layout/UserLayout'
 
 
 
-const SelectService = () => {
+const SelectService = ({ selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices }) => {
     
     const services = {
   'General Care': ['Wound dressing', 'Injections', 'Health monitoring'],
@@ -13,7 +13,7 @@ const SelectService = () => {
   'Elderly Care': ['Dementia care', 'Mobility assistance', 'Companionship']
 };
   
-  const { selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
+
     
   useEffect(() => {
     if (selectedService && services[selectedService]) {

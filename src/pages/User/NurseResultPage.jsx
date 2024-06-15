@@ -17,6 +17,8 @@ const NurseResultPage = () => {
 
 
   const { resStatus } = useContext(UserDataContext);
+  if (!resStatus) return <Loading />
+  //const resStatus = sessionStorage.getItem('resStatus');
   
     if (!resStatus) return <Loading />
     if (resStatus === 200) return <NearbyNurses/>
