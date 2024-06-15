@@ -22,7 +22,9 @@ const SetPosition = () => {
   
   //get NearBy nurses button
   const nearbyNurses = () => { 
+    
     console.log("wow");
+    navigate("/User-result");
     //localStorage.setItem('currentStep', '/User-nearbyNurses');
     const token = localStorage.getItem('token');
     axios.post('http://localhost:3000/patients/profile/nearby-nurses', {
@@ -36,8 +38,7 @@ const SetPosition = () => {
     }).then(res => {
       console.log(res);
       setNurseList(res.data.nurseList);
-      setResStatus(res.data.status);
-      navigate("/User-nearby-nurses");
+      setResStatus(res.status);
     }).catch(err => {
       console.log(err);
     })
@@ -55,7 +56,7 @@ const SetPosition = () => {
           <FontAwesomeIcon icon={faMapPin} className='absolute text-darkGreen4 left-4'/>
           <input type="text" placeholder='position' className='location appearance-none shadow-panelShadow rounded-20 text-sm py-2 pl-10 w-full outline-none text-darkGreen1 focus:ring-1 focus:ring-darkGreen4' value={userLocation || ''}  onChange={e => {
     const parts = e.target.value.split(',').map(Number);
-    setUserLocation(parts);
+            setUserLocation(parts);
   }}/>
         </div>  
       </div>

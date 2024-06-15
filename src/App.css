@@ -171,6 +171,137 @@ th, td {
 }
 /* end rating stars */
 
+/* Wave text loader made by: csozi | Website: english.csozi.hu*/
+.textloading {
+  color: #1b7a8b;
+  font-weight: bolder;
+}
+@keyframes letter {
+  0% {
+    font-size: 30px;
+  }
+  50% {
+    font-size: 40px;
+  }
+  100% {
+    font-size: 30px;
+  }
+}
+.letter {
+  animation: letter 1s infinite;
+}
+.letter1 {
+  animation-delay: 0s;
+}
+.letter2 {
+  animation-delay: -0.9s;
+}
+.letter3 {
+  animation-delay: -0.8s;
+}
+.letter4 {
+  animation-delay: -0.7s;
+}
+.letter5 {
+  animation-delay: -0.6s;
+}
+.letter6 {
+  animation-delay: -0.5s;
+}
+.letter7 {
+  animation-delay: -0.4s;
+}
+.letter8 {
+  animation-delay: -0.3s;
+}
+.letter9 {
+  animation-delay: -0.2s;
+}
+.letter10 {
+  animation-delay: -0.1s;
+}
+/* end Wave text loader made by: csozi | Website: english.csozi.hu*/
+
+/* look for nurse loading*/
+.loader-spanne-20 {
+  position: relative;
+  width: 100px;
+  height: 30px;
+  padding: 0;
+}
+
+.loader-spanne-20>span {
+  position: absolute;
+  right: 0;
+  width: 3px;
+  height: 30px;
+  background-color: rgb(116, 204, 197);
+  display: block;
+  border-radius: 3px;
+  transform-origin: 50% 100%;
+  animation: move 2.8s linear infinite;
+}
+
+.loader-spanne-20>span:nth-child(1) {
+  animation-delay: -0.4s;
+}
+
+.loader-spanne-20>span:nth-child(2) {
+  animation-delay: -0.8s;
+}
+
+.loader-spanne-20>span:nth-child(3) {
+  animation-delay: -1.2s;
+}
+
+.loader-spanne-20>span:nth-child(4) {
+  animation-delay: -1.6s;
+}
+
+.loader-spanne-20>span:nth-child(5) {
+  animation-delay: -2s;
+}
+
+.loader-spanne-20>span:nth-child(6) {
+  animation-delay: -2.4s;
+}
+
+.loader-spanne-20>span:nth-child(7) {
+  animation-delay: -2.8s;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translateX(0px) rotate(0deg);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  40% {
+    transform: translateX(-40px) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50px) rotate(22deg);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateX(-85px) rotate(60deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100px) rotate(65deg);
+  }
+}
+/* end look for nurse loading*/
+
+
 
 
 

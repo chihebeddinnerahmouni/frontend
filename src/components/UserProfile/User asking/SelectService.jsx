@@ -15,7 +15,7 @@ const SelectService = () => {
   
   const { selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
     
-        useEffect(() => {
+  useEffect(() => {
     if (selectedService && services[selectedService]) {
       setSubServices(services[selectedService]);
       setSelectedSubService()
