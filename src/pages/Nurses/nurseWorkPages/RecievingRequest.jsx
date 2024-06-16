@@ -13,7 +13,7 @@ const RecievingRequest = () => {
   
   //const { requestData } = useContext(NurseDataContext);
   const navigate = useNavigate();
-  const [requestData, setRequestData] = useState();
+  //const [requestData, setRequestData] = useState();
   const [service, setService] = useState("");
   const [subService, setSubService] = useState("");
   const [distance, setDistance] = useState("");
@@ -40,20 +40,6 @@ const RecievingRequest = () => {
         console.log("from recieving error ", error);
       });
    }, []);
-
-
-  useEffect(() => {
-    if (requestData) {
-
-    }
-  }, [requestData]);
-
- 
-
- 
-  
- 
-  
 
   const accept = () => { 
     navigate("/Nurse-accepting");

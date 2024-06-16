@@ -16,18 +16,22 @@ const WaitForReaquest = () => {
   }
 
   return (
-    <div className="w-full pt-12 px-8 flex flex-col items-center ">
+    <>
+    <div className="main w-full pt-12 px-8 flex flex-col items-center ">
         <div className="content flex flex-col items-center mt-20">
           <FontAwesomeIcon icon={faCheck} className="text-darkGreen4 text-[200px]" />
           <h1 className="text-2xl text-darkGreen4 my-6">Waiting for Request</h1>
           <div className="loader"></div>
-      </div>
-
+        </div>
       <button>
         <p className="" onClick={aaa}>arrived request</p>
       </button>
+    </div> // end of main
 
+    <div className="request">
+        
     </div>
+    </>
   );
 };
 

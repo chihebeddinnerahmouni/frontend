@@ -10,7 +10,8 @@ const NurseWorkPageTop = () => {
   const switchStateRef = useRef(null);
   //let lat, long;
 
-const switchStateButton = () => {
+  const switchStateButton = () => {
+  if (isTaken) { toast.error("You can't change your work status while you are on a request"); event.preventDefault(); return; }
   if (switchStateRef.current.classList.contains("active")) {
     switchStateRef.current.classList.remove("active"); // switched off
     setIsWork(false);
@@ -41,9 +42,9 @@ const switchStateButton = () => {
   return (
     <div className="top relative z-20 bg-white shadow-panelShadow rounded-br-20 rounded-bl-20 px-5 flex justify-between items-center py-2 mx-4">
         <span className="font-[500] text-darkGreen4">Appointment</span>
-        <div ref={switchStateRef} onClick={() => isTaken ? toast.error('Cannot switch state while taken') : switchStateButton()}>
+        <div ref={switchStateRef} onClick={switchStateButton} style={isTaken ? {pointerEvents: 'none'} : {}}>
         <label className="toggle-btn">
-            <input type="checkbox" />
+            <input type="checkbox"/>
             <span className="toggle-text"></span>
           </label>
         </div>
