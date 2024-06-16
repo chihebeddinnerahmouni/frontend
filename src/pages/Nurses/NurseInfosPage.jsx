@@ -9,14 +9,43 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import convertToLocalServerPath from "../../utils/photoPathChanging";
+import axios from "axios";
 
 
 
 const NurseInfosPage = () => {
-  const { nurseData } = useContext(NurseDataContext);
-  if (!nurseData) return <p>loading</p>
-  const { name, specialite, email, phone, profilePicture } = nurseData;
-  const image = convertToLocalServerPath(profilePicture);
+  const { setNurseData } = useContext(NurseDataContext);
+  const [name, setName] = useState("");
+  const [specialite, setSpecialite] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [image, setImage] = useState("");
+  const [rate, setRate] = useState(0);
+  const [patientClients, setPatientClients] = useState(0);
+  //if (!nurseData) return <p>loading</p>
+  //const { name, specialite, email, phone, profilePicture } = nurseData;
+  //const image = convertToLocalServerPath(profilePicture);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.get("http://localhost:3000/nurses/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setNurseData(response.data);
+        setName(response.data.name);
+        setSpecialite(response.data.specialite);
+        setEmail(response.data.email);
+        setPhone(response.data.phone);
+        setImage(convertToLocalServerPath(response.data.profilePicture));
+        setRate(response.data.averageRating);
+        setPatientClients(response.data.patientClients);
+      })
+      .catch((error) => {
+        console.log("from prifile error ", error);
+      });
+  }, []);
 
 
 
@@ -52,9 +81,9 @@ const NurseInfosPage = () => {
             </button>
           </div>
           <div className="Numbers mt-5 flex justify-between px-2">
-            <Statistique title={"patient"} icon={faUsers} number={380} />
+            <Statistique title={"patient"} icon={faUsers} number={patientClients} />
             <Statistique title={"Liked"} icon={faHeart} number={100} />
-            <Statistique title={"Rate"} icon={faStar} number={4.2} />
+            <Statistique title={"Rate"} icon={faStar} number={rate} />
           </div>
                 <div className="about mt-5">
         <p className="font-[500] text-darkGreen2">About</p>

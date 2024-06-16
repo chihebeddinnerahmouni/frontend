@@ -301,6 +301,26 @@ th, td {
 }
 /* end look for nurse loading*/
 
+/* nurse wait for request loader*/
+.loader {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 #1b7a8b;
+  animation: load 2s linear infinite alternate;
+}
+
+@keyframes load {
+  0% {
+    box-shadow: inset -20px 40px 0 #1b7a8b;
+  }
+
+  100% {
+    box-shadow: inset 20px -40px 0 #1b7a8b;
+  }
+}
+/* end nurse wait for request loader*/
+
 
 
 

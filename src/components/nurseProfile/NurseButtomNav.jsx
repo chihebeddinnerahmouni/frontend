@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalendar, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 
 
+
 const NurseButtomNav = () => {
 
     const navLinks = [
@@ -20,7 +21,7 @@ const NurseButtomNav = () => {
             },
             {
             title: 'Work',
-            path: '/Nurse-noWork',
+            path: '/Nurse-work',
             icon: <FontAwesomeIcon icon={faCalendar} />
             },
             {

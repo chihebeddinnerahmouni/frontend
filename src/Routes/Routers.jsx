@@ -9,9 +9,11 @@ import Home from "../pages/Home";
  import Doctors from "../pages/Doctors/Doctors";
 import ProfileInfos from "../pages/Doctors/ProfileInfos";
 import DoctorDetails from "../pages/Doctors/DoctorsDetails";
- import SchedulesPage from "../pages/Doctors/SchedulesPage";
+import SchedulesPage from "../pages/Doctors/SchedulesPage";
 import { Routes, Route } from "react-router-dom";
+//nurse 
 import NurseInfosPage from "../pages/Nurses/NurseInfosPage";
+import NurseWorkPage from "../pages/Nurses/nurseWorkPages/NurseWorkPage";
 import AcceptingWork from "../pages/Nurses/nurseWorkPages/acceptingWork";
 import NurseWorkLayout from "../Layout/nurse profile/NurseWorkLayout";
 import NoworkPage from "../pages/Nurses/nurseWorkPages/NoworkPage";
@@ -45,7 +47,7 @@ return (
 <Route path="/schedules" element={<ProfileLayout type="SCHEDULES"><SchedulesPage /></ProfileLayout>} />
 {/* nurses */}
 <Route path="/Nurse-Profile" element={<NurseWorkLayout><NurseInfosPage /></NurseWorkLayout>} />
-<Route path="/Nurse-noWork" element={<NurseWorkLayout><NoworkPage  /></NurseWorkLayout>} />
+<Route path="/Nurse-work" element={<NurseWorkLayout><NurseWorkPage  /></NurseWorkLayout>} />
 <Route path="/Nurse-recieving" element={<NurseWorkLayout><RecievingRequest  /></NurseWorkLayout>} />
 <Route path="/Nurse-accepting" element={<NurseWorkLayout><AcceptingWork /></NurseWorkLayout>} />
 <Route path="/Nurse-endWork" element={<NurseWorkLayout><EndWork /></NurseWorkLayout>} />

@@ -4,15 +4,16 @@ import map from "../../../assets/images/map.jpg";
 import Distance from "../../../components/nurseProfile/recieving requests/Distance";
 import CheckClientAndPrice from "../../../components/nurseProfile/recieving requests/CheckClientAndPrice";
 import { NurseDataContext } from "../../../Layout/nurse profile/NurseWorkLayout";
+import axios from "axios";
 
 
 
 
 const RecievingRequest = () => {
   
-  const { requestData } = useContext(NurseDataContext);
-  console.log("requestData", requestData);
+  //const { requestData } = useContext(NurseDataContext);
   const navigate = useNavigate();
+  const [requestData, setRequestData] = useState();
   const [service, setService] = useState("");
   const [subService, setSubService] = useState("");
   const [distance, setDistance] = useState("");
@@ -20,14 +21,30 @@ const RecievingRequest = () => {
   const [patient, setPatient] = useState("");
   const [patientRate, setPatientRate] = useState("");
 
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/nurses/profile/get-request", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+      .then((response) => {
+      setService(response.data[0].service);
+      setSubService(response.data[0].subService);
+      setDistance(response.data[0].distance);
+      setPrice(response.data[0].price);
+      setPatient(response.data[0].patient);
+      setPatientRate(response.data[0].patientRate);
+       })
+      .catch((error) => {
+        console.log("from recieving error ", error);
+      });
+   }, []);
+
+
   useEffect(() => {
     if (requestData) {
-      setService(requestData[0].service);
-      setSubService(requestData[0].subService);
-      setDistance(requestData[0].distance);
-      setPrice(requestData[0].price);
-      setPatient(requestData[0].patient);
-      setPatientRate(requestData[0].patientRate);
+
     }
   }, [requestData]);
 
@@ -47,7 +64,7 @@ const RecievingRequest = () => {
 
   return (
     <>
-      <div className="relative flex flex-col min-h-screen">
+      <div className="relative flex flex-col">
         <div
           className="map w-full h-[450px] absolute top-[-50px]"
           style={{

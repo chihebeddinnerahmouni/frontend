@@ -5,40 +5,27 @@ import NurseButtomNav from '../../components/nurseProfile/NurseButtomNav';
 import NurseInfosPage from "../../pages/Nurses/NurseInfosPage";
 
 
-
 export const NurseDataContext = createContext();
 
 
 const NurseWorkLayout = ({ children }) => {
   const [nurseData, setNurseData] = useState();
-  const [requestData, setRequestData] = useState();
+  const [isWork, setIsWork] = useState(false);
+  const [isTaken, setIsTaken] = useState(false);
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:3000/nurses/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setNurseData(response.data);
-        setRequestData(response.data.patientRequests);
-      })
-      .catch((error) => {
-        console.log("from prifile error ", error);
-      });
-  }, [children]);
-
+  console.log("isWork", isWork);
+  console.log("isTaken", isTaken);
 
     return (
       <>
-        <NurseDataContext.Provider value={{ nurseData, setNurseData, requestData }}>
-        <div className="main bg-creme min-h-screen">
+        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken}}>
+        <div className="bg-creme2 min-h-screen w-full">
       {children.type !== NurseInfosPage && <NurseWorkPageTop />}
             <main>
-              {children}
+              <div className="main">
+                {children}
+              </div>
             </main>
       <NurseButtomNav />
           </div>
