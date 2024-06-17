@@ -12,12 +12,12 @@ import { useNavigate } from 'react-router-dom';
 
 const SetPosition = () => {
 
-  const { setResStatus, setNurseList } = useContext(UserDataContext);
+  const { setResStatus, setNurseList,setUserLocation,userLocation ,selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
   const [isValidLocation, setIsValidLocation] = useState(false);
-  const [userLocation, setUserLocation] = useState([]);
-  const [selectedService, setSelectedService] = useState();
-  const [selectedSubService, setSelectedSubService] = useState();
-  const [subServices, setSubServices] = useState([]);
+  //const [userLocation, setUserLocation] = useState([]);
+  //const [selectedService, setSelectedService] = useState();
+  //const [selectedSubService, setSelectedSubService] = useState();
+  //const [subServices, setSubServices] = useState([]);
   const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,7 +27,6 @@ const SetPosition = () => {
   //get NearBy nurses button
   const nearbyNurses = () => { 
     navigate("/User-result");
-    //localStorage.setItem('currentStep', '/User-nearbyNurses');
     const token = localStorage.getItem('token');
     axios.post('http://localhost:3000/patients/profile/nearby-nurses', {
       userLocation: userLocation,
@@ -38,8 +37,6 @@ const SetPosition = () => {
         Authorization: `Bearer ${token}`
       }
     }).then(res => {  
-      //sessionStorage.setItem('nurseList', JSON.stringify(res.data.nurseList));
-      //sessionStorage.setItem('resStatus', res.status);
       setResStatus(res.status);
       setNurseList(res.data.nurseList);
     }).catch(err => {

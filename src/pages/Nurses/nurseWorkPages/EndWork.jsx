@@ -17,6 +17,17 @@ const EndWork = () => {
   const [stars, setStars] = useState(0);
   const navigate = useNavigate();
 
+  const send = () => { 
+    axios.put("http://localhost:3000/nurses/profile/rate-patient",
+      { rating: stars, comment, patientName: "chiheb" },//change the patientName
+      { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
+    ).then(res => {
+      console.log(res.data);
+    }).catch(err => { 
+      console.log("from rating axios err :", err);
+    });
+  }
+
 
 
   return (
@@ -40,7 +51,7 @@ const EndWork = () => {
         </div>
         <div className="commentAndConfirme w-full flex flex-col gap-4">
           <input type="text" className="appearance-none outline-none bg-[#e7e6ea] text-sm py-3 rounded-[10px] px-4  focus:ring-2 focus:ring-darkGreen4" value={comment} placeholder="add a comment" onChange={(e) => setComment(e.target.value)} />
-          <button className="bg-darkGreen4 text-white rounded-50 text-sm py-3">Send</button>
+          <button className="bg-darkGreen4 text-white rounded-50 text-sm py-3" onClick={send}>Send</button>
         </div>
       </div>
 

@@ -6,7 +6,7 @@ import { NurseDataContext } from '../../../Layout/nurse profile/NurseWorkLayout'
 
 const NurseWorkPageTop = () => {
 
-  const { setIsWork, isTaken } = useContext(NurseDataContext);
+  const { setIsWork, isTaken, setNurseLocation } = useContext(NurseDataContext);
   const switchStateRef = useRef(null);
   //let lat, long;
 
@@ -38,6 +38,7 @@ const NurseWorkPageTop = () => {
       }).then((res) => {
         switchStateRef.current.classList.add("active"); // switched on
         toast.success(res.data.message);
+        setNurseLocation([lat, long]);
         setIsWork(true);
       }).catch((err) => { 
         console.log("axios err", err);

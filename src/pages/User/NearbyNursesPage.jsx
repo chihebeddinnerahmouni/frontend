@@ -8,28 +8,35 @@ import Loading from '../../components/all/Loading';
 import AcceptedRequest from './AcceptedRequestPage';
 import NoNearbyNursePage from './NoNearbyNursePage';
 import WaitForAccept from './WaitForAccept';
+import WaitForChoosen from './WaitChoosenNursePage';
+import axios from 'axios';
 
 
 
 
 const NearbyNurses = () => {
 
-   /* const nurseListt = [
-        { nurseName: "Affaf Aissaoui", nurseRate: 4.5,nurseLikes:80 ,nurseSpecialite: "kolch", patientClients: 90, profilePic: {image}, price: 500},
-        { nurseName: "Djeloul Dali", nurseRate: 4.0, nurseLikes: 80, nurseSpecialite: "kolch thani", patientClients: 50, profilePic: {image2}, price: 500},
-        { nurseName: "Djeloul Dali", nurseRate: 4.0, nurseLikes: 80, nurseSpecialite: "kolch thani", patientClients: 50, profilePic: {image2}, price: 500},
-  ];*/
-  const { /*nurseRequestName,*/ acceptedRequest, nurseList } = useContext(UserDataContext);
-
+  const { acceptedRequest ,nurseList ,userLocation ,selectedService ,selectedSubService, setAcceptedRequest  } = useContext(UserDataContext);
   const [isWaiting, setIsWaiting] = useState(true);
-  //const [acceptedRequest, setAcceptedRequest] = useState(true);
-  const [nurseRequestName, setNurseRequestName] = useState();
-  //const [serviceNurseData, setServiceNurseData] = useState({ nurseName: "Affaf Aissaoui", nurseRate: 4.5, nurseLikes: 80, nurseSpecialite: "kolch", patientClients: 90, price: 500 } );
+  const [choosenNurseName, setChoosenNurseName] = useState();
 
-  //const nurseList = JSON.parse(sessionStorage.getItem('nurseList'));
 
   const sendRequest = () => {
-    console.log("way") 
+    axios.put('http://localhost:3000/patients/profile/choose-nurse',
+      {
+        nurseName: choosenNurseName,
+        service: selectedService,
+        subService: selectedSubService,
+        userLocation: userLocation
+      },
+      { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+    ).then(res => { 
+      console.log(res.data.message);
+      setIsWaiting(true);
+      //setAcceptedRequest({ status: false, nurseData: {} });
+    }).catch(err => {
+      console.log("sendRequest for choosen nurse error", err);
+    });
   }
 
 
@@ -42,20 +49,26 @@ const NearbyNurses = () => {
         <p className='text-writingGrey text-sm self-start mt-6'>Selectionner</p>    
         <div className="nearByNurses mt-2 flex flex-col w-full gap-2">
               {nurseList ? nurseList.map((nurse, index) => {
-                return <NearByNurseComp key={index} nurseName={nurse.nurseName} nurseRate={nurse.nurseRate} nurseLikes={nurse.nurseLikes} nurseSpecialite={nurse.nurseSpecialite} patientClients={nurse.patientClients} profilePic={nurse.profilePic} price={nurse.price} setNurseRequestName={setNurseRequestName} nurseRequestName={nurseRequestName}/>
+                return <NearByNurseComp key={index} nurseName={nurse.nurseName} nurseRate={nurse.nurseRate} nurseLikes={nurse.nurseLikes} nurseSpecialite={nurse.nurseSpecialite} patientClients={nurse.patientClients} profilePic={nurse.profilePic} price={nurse.price} setChoosenNurseName={setChoosenNurseName} choosenNurseName={choosenNurseName}/>
               }) : <Loading />}  
         </div>
       </div>
 
       <div className="confirmeNurse w-full mt-5 pr-4 fixed bottom-[70px]">
-        <button className={`w-full py-3 rounded-[10px] ${nurseRequestName ? 'bg-darkGreen4' : 'bg-gray-400'} shadow-panelShadow text-creme2`} disabled={!nurseRequestName} onClick={sendRequest}>
+        <button className={`w-full py-3 rounded-[10px] ${choosenNurseName ? 'bg-darkGreen4' : 'bg-gray-400'} shadow-panelShadow text-creme2`} disabled={!choosenNurseName} onClick={sendRequest}>
           cbn n3ytolo?
         </button>
       </div>      
     </div>
 
-    <div className={`acceptedRequest w-[300px] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 ${isWaiting ? '' : 'hidden' }`}>
-        {acceptedRequest.status ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> : <WaitForAccept />}
+    <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-[40%] ${isWaiting ? '' : 'hidden' }`}>
+        {/*{acceptedRequest.status ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> : <WaitForAccept />}*/}
+        {acceptedRequest.state 
+    ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> 
+    : choosenNurseName 
+        ? <WaitForChoosen data={acceptedRequest.nurseData}/> 
+        : <WaitForAccept />
+}
     </div>
       
     </>

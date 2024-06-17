@@ -2,15 +2,25 @@ import React, {useContext} from 'react';
 import image from '../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
-//import { UserDataContext } from '../../Layout/UserLayout';
+import { UserDataContext } from '../../Layout/UserLayout';
+import axios from 'axios';
 
 
 const AcceptedRequest = ({data, setIsWaiting}) => {
 
-  //const { setIsWaiting } = useContext(UserDataContext);
+  const { setAcceptedRequest } = useContext(UserDataContext);
   
   const anotherNurse = () => { 
-    setIsWaiting(false);
+    axios.put('http://localhost:3000/patients/profile/refuse-nurse',
+      {},
+      { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
+    ).then((res) => { 
+      console.log(res.data.message);
+      setIsWaiting(false);
+      setAcceptedRequest({ state: false, nurseData: {} });
+    }).catch((err) => {
+      console.log(err)
+    });
   };
 
 

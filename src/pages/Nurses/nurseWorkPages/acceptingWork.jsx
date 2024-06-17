@@ -8,19 +8,29 @@ import GpsFromTo from "../../../components/nurseProfile/NurseWork/GpsFromTo";
 import MapSection from "../../../components/nurseProfile/NurseWork/MapSection";
 import { useNavigate } from "react-router-dom";
 import { NurseDataContext } from "../../../Layout/nurse profile/NurseWorkLayout";
-
+import axios from "axios";
 
 
 
 
 const AcceptingWork = () => {
-  const { requestData } = useContext(NurseDataContext);
+  const { requestData, nurseLocation } = useContext(NurseDataContext);
 
-  console.log(requestData);
   const navigate = useNavigate();
 
   const finish = () => { 
-    navigate("/Nurse-endWork");
+    //navigate("/Nurse-endWork");
+    axios.put("http://localhost:3000/nurses/profile/service-end",
+      {},
+      { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
+    ).then(res => {
+      navigate("/Nurse-endWork");
+    }).catch(err => { 
+      console.log("from acceptingwork axios err :", err);
+    });
+    
+    
+    
   }
 
 
@@ -46,7 +56,7 @@ const AcceptingWork = () => {
           <GpsFromTo to={requestData.location.coordinates} />
           <div className="locations">
             <p className="text-writingGrey text-[12px]">from</p>
-            <p className="text-darkGreen2 text-sm font-[500]">23 Main St, Springfield, IL 62701, USA</p>
+            <p className="text-darkGreen2 text-sm font-[500]">{nurseLocation}</p>
             <p className="text-writingGrey text-[12px] mt-8">to</p>
             <p className="text-darkGreen2 text-sm font-[500]">{requestData.location.coordinates}</p>
           </div>

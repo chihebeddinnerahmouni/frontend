@@ -10,14 +10,14 @@ export const NurseDataContext = createContext();
 
 const NurseWorkLayout = ({ children }) => {
   const [nurseData, setNurseData] = useState();
+  const [nurseLocation, setNurseLocation] = useState();
   const [isWork, setIsWork] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
   const [requestData, setRequestData] = useState();
 
-
     return (
       <>
-        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData}}>
+        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData, nurseLocation, setNurseLocation}}>
       {children.type !== NurseInfosPage && <NurseWorkPageTop />}
           <main>
             <div className={`main bg-creme2 w-full mt-[-50px] min-h-screen flex flex-col` }>
