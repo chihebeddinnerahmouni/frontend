@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import NurseWorkPageTop from "../../../components/nurseProfile/NurseWork/NurseWorkPageTop";
 import map from "../../../assets/images/map.jpg";
 import ClientInfos from "../../../components/nurseProfile/NurseWork/ClientInfos";
@@ -7,17 +7,20 @@ import { faRoad, faClock, faDollarSign } from "@fortawesome/free-solid-svg-icons
 import GpsFromTo from "../../../components/nurseProfile/NurseWork/GpsFromTo";
 import MapSection from "../../../components/nurseProfile/NurseWork/MapSection";
 import { useNavigate } from "react-router-dom";
+import { NurseDataContext } from "../../../Layout/nurse profile/NurseWorkLayout";
 
 
 
 
 
 const AcceptingWork = () => {
+  const { requestData } = useContext(NurseDataContext);
+
+  console.log(requestData);
   const navigate = useNavigate();
 
   const finish = () => { 
     navigate("/Nurse-endWork");
-
   }
 
 
@@ -30,22 +33,22 @@ const AcceptingWork = () => {
       <div className="bg-creme2 z-2 w-full rounded-tl-20 rounded-tr-20 shadow-panelShadow px-6 pt-4 pb-20 flex-grow relative z-20 mt-[280px]">
         <hr className="border-t-[3px] border-darkGreen2 w-[70px] rounded-50 absolute left-[50%] translate-x-[-50%]" />
         <p className="mt-4 mb-5 text-darkGreen2 font-[800]">On the way</p>
-        <ClientInfos />
+        <ClientInfos name={requestData.patient} rate={requestData.patientRate}/>
         <hr className="mt-6 border-1 border-darkGreen4 " />
 
         <div className="ServiceDetails mt-6 flex items-center justify-between px-2">
-          <ServiceDetails icon={faRoad} info={"2.6 km"}/>
+          <ServiceDetails icon={faRoad} info={requestData.distance +' ' + "km"}/>
           <ServiceDetails icon={faClock} info={"15 min"}/>
-          <ServiceDetails icon={faDollarSign} info={"700 da"}/>
+          <ServiceDetails icon={faDollarSign} info={requestData.price +' ' + 'DZD'}/>
         </div>
 
         <div className="placement mt-6 flex items-start gap-2">
-          <GpsFromTo />
+          <GpsFromTo to={requestData.location.coordinates} />
           <div className="locations">
             <p className="text-writingGrey text-[12px]">from</p>
             <p className="text-darkGreen2 text-sm font-[500]">23 Main St, Springfield, IL 62701, USA</p>
             <p className="text-writingGrey text-[12px] mt-8">to</p>
-            <p className="text-darkGreen2 text-sm font-[500]">456 Park Ave, New York, NY 10022, USA</p>
+            <p className="text-darkGreen2 text-sm font-[500]">{requestData.location.coordinates}</p>
           </div>
         </div>
 

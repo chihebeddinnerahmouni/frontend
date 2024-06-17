@@ -1,7 +1,7 @@
 import React, {  useRef, useEffect } from "react";
 
 
-const RateComp = ({ stars, setStars }) => {
+const RateComp = ({ stars, setStars, sentence }) => {
     const avisRef = useRef();
 
 
@@ -36,7 +36,7 @@ const RateComp = ({ stars, setStars }) => {
   return (
     <div className="flex flex-col items-center">
       <p className="text-darkGreen4 font-[600] flex flex-col items-center font-poppins">
-        How did you find affaf's service ?
+        {sentence}
       </p>
       <div className="rating">
         <input value="5" name="rate" id="star5" type="radio" onClick={()=> rate(5)}/>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 const GpsFromTo = () => {
+
   return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div className="w-[20px] h-[20px] bg-darkGreen4 rounded-50 flex justify-center items-center">

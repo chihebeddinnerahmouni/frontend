@@ -12,23 +12,19 @@ const NurseWorkLayout = ({ children }) => {
   const [nurseData, setNurseData] = useState();
   const [isWork, setIsWork] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
+  const [requestData, setRequestData] = useState();
 
-
-  console.log("isWork", isWork);
-  console.log("isTaken", isTaken);
 
     return (
       <>
-        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken}}>
-        <div className="bg-creme2 min-h-screen w-full">
+        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData}}>
       {children.type !== NurseInfosPage && <NurseWorkPageTop />}
-            <main>
-              <div className="main">
-                {children}
-              </div>
+          <main>
+            <div className={`main bg-creme2 w-full mt-[-50px] min-h-screen flex flex-col` }>
+              {children}
+            </div>
             </main>
       <NurseButtomNav />
-          </div>
          </NurseDataContext.Provider>
           
         </>

@@ -5,13 +5,15 @@ import Distance from "../../../components/nurseProfile/recieving requests/Distan
 import CheckClientAndPrice from "../../../components/nurseProfile/recieving requests/CheckClientAndPrice";
 import { NurseDataContext } from "../../../Layout/nurse profile/NurseWorkLayout";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
 
 const RecievingRequest = () => {
   
-  //const { requestData } = useContext(NurseDataContext);
+  const { setIsTaken, isTaken, setRequestData } = useContext(NurseDataContext);
   const navigate = useNavigate();
   //const [requestData, setRequestData] = useState();
   const [service, setService] = useState("");
@@ -23,12 +25,16 @@ const RecievingRequest = () => {
 
 
   useEffect(() => {
+      if (!isTaken) {
+    return;
+  }
     axios.get("http://localhost:3000/nurses/profile/get-request", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
     })
       .then((response) => {
+      setRequestData(response.data[0]);
       setService(response.data[0].service);
       setSubService(response.data[0].subService);
       setDistance(response.data[0].distance);
@@ -39,10 +45,39 @@ const RecievingRequest = () => {
       .catch((error) => {
         console.log("from recieving error ", error);
       });
-   }, []);
+   }, [isTaken]);
 
   const accept = () => { 
-    navigate("/Nurse-accepting");
+    //navigate("/Nurse-accepting");
+    axios.put("http://localhost:3000/nurses/profile/accept-request",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }).then((response) => { 
+        toast.success(response.data.message);
+        navigate("/Nurse-accepting");
+      })
+      .catch((error) => {
+        console.log("from recieving accept error ", error);
+      });
+  };
+
+  const decline = () => {
+    //setIsTaken(false);
+    axios.put("http://localhost:3000/nurses/profile/refuse-request",
+      {},
+      {        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }})
+      .then((response) => {
+        toast.success(response.data.message);
+        setIsTaken(false);
+       })
+      .catch((error) => {
+        console.log("from recieving decline error ", error);
+      });
   };
 
 
@@ -50,9 +85,38 @@ const RecievingRequest = () => {
 
   return (
     <>
-      <div className="relative flex flex-col">
+        <div className="req w-full bg-white p-3 rounded-20 flex flex-col items-center gap-3">
+          <div className="map w-full h-[200px] rounded-20" style={{ backgroundImage: `url(${encodeURI(map)})`, backgroundSize: "cover", backgroundPosition: "center", }}></div>
+          <div className="infos flex flex-col items-center w-full">
+            <hr className="border-t-[3px] border-darkGreen2 w-[70px] rounded-50" />
+            <p className=" mt-2 text-darkGreen2 font-[600]">{service}</p>
+            <span className=" mt-1 text-writingGrey">{subService}</span>
+            <span className="mt-4"><Distance Distance={distance} /></span>
+            <hr className=" w-full my-6 mb-8" />
+            <CheckClientAndPrice price={price} patient={patient} patientRate={patientRate} />
+            <div className="buttons flex justify-between w-full mt-8">
+            <button className="text-darkGreen4 py-2 rounded-[10px] border-2 border-darkGreen4 w-[48%]" onClick={decline}>
+              Decline
+            </button>
+            <button className="bg-darkGreen4 text-white py-2 rounded-[10px] w-[48%]" onClick={accept}>
+              accept
+            </button>
+          </div>
+          </div>
+        </div>
+    
+    </>
+  );
+};
+
+export default RecievingRequest;
+
+
+/*
+<div className="main bg-green-300 flex flex-col items-center justify-center">
+      <div className="relative flex flex-col  justify-center items-center">
         <div
-          className="map w-full h-[450px] absolute top-[-50px]"
+          className="map w-full h-[250px]"
           style={{
             backgroundImage: `url(${encodeURI(map)})`,
             backgroundSize: "cover",
@@ -60,7 +124,7 @@ const RecievingRequest = () => {
           }}
         ></div>
 
-        <div className="bg-creme2 relative z-2 w-full flex-grow rounded-tl-20 rounded-tr-20 shadow-panelShadow mt-[320px] px-4 pt-3 pb-[70px] flex flex-col items-center">
+        <div className="bg-red-300 relative z-2 w-full flex-grow rounded-tl-20 rounded-tr-20 px-4 pt-3 pb-[70px] flex flex-col items-center">
           <hr className="border-t-[3px] border-darkGreen2 w-[70px] rounded-50" />
           <span className=" mt-4 text-darkGreen2 font-[600]">{service}</span>
           <span className=" mt-1 text-writingGrey">{subService}</span>
@@ -79,9 +143,6 @@ const RecievingRequest = () => {
           
           
           </div>
+        </div>
       </div>
-    </>
-  );
-};
-
-export default RecievingRequest;
+      */

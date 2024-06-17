@@ -14,7 +14,6 @@ const NoworkPage = () => {
           Now you are out, please change your status
         </span>
       </div>
-      )
     </>
   );
 };

@@ -48,7 +48,7 @@ const ServiceEnd = () => {
       <div className="rate w-full flex-1 mt-6 flex flex-col items-center justify-between">
         <p className="text-sm text-darkGreen4 self-start">your feed back important to us</p>
         <div className="starsRate">
-          <RateComp stars={stars} setStars={setStars} />
+          <RateComp stars={stars} setStars={setStars} sentence={"How did you find affaf's service ?"} />
         </div>
 
         <div className="commentAndConfirme w-full flex flex-col gap-4">
