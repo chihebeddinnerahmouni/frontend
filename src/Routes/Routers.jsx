@@ -29,6 +29,7 @@ import ServiceEnd from "../pages/User/ServiceEndPage";
 import ThankYouPage from "../pages/User/ThankYouPage";
 import NurseResultPage from "../pages/User/NurseResultPage";
 import TestPage from "../pages/User/TestPage";
+import AcceptedServicePage from "../pages/User/AcceptedServicePage";
 
 
 const Routers = ()=>{
@@ -56,6 +57,7 @@ return (
 <Route path="/User-asking" element={<UserLayout><AskingForNurse /></UserLayout>} />
 <Route path="/User-set-position" element={<UserLayout><SetPosition /></UserLayout>} />
 <Route path="/User-result" element={<UserLayout><NurseResultPage /></UserLayout>} />
+<Route path="/User-accepted" element={<UserLayout><AcceptedServicePage /></UserLayout>} />
 <Route path="/User-service-end" element={<UserLayout><ServiceEnd /></UserLayout>} />
 <Route path="/User-thanks" element={<UserLayout><ThankYouPage /></UserLayout>} />
 <Route path="/User-test" element={<UserLayout><TestPage /></UserLayout>} />

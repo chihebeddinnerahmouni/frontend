@@ -14,11 +14,10 @@ const SetPosition = () => {
 
   const { setResStatus, setNurseList,setUserLocation,userLocation ,selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
   const [isValidLocation, setIsValidLocation] = useState(false);
-  //const [userLocation, setUserLocation] = useState([]);
-  //const [selectedService, setSelectedService] = useState();
-  //const [selectedSubService, setSelectedSubService] = useState();
-  //const [subServices, setSubServices] = useState([]);
   const navigate = useNavigate();
+
+
+
 
     useEffect(() => {
     setIsValidLocation(userLocation && userLocation.length > 0);
@@ -66,8 +65,8 @@ const SetPosition = () => {
           <PositionOptions setUserLocation={setUserLocation} />
           </div>
 
-        <div className={`terminer w-full text-creme2 py-3 text-center ${isValidLocation && selectedService && selectedSubService ? 'bg-darkGreen4' : 'bg-gray-400'} rounded-[10px]`}>
-          <button disabled={!(isValidLocation && selectedService && selectedSubService)} onClick={nearbyNurses}>
+        <div className={`terminer w-full text-creme2 py-3 text-center ${isValidLocation && selectedService !== "" && selectedSubService !== "" ? 'bg-darkGreen4' : 'bg-gray-400'} rounded-[10px]`}>
+          <button disabled={!(isValidLocation && selectedService !== "" && selectedSubService !== "" )} onClick={nearbyNurses}>
               Terminer
             </button>
           </div>

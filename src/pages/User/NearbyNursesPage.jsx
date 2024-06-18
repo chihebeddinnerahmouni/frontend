@@ -18,7 +18,7 @@ const NearbyNurses = () => {
 
   const { acceptedRequest ,nurseList ,userLocation ,selectedService ,selectedSubService, setAcceptedRequest  } = useContext(UserDataContext);
   const [isWaiting, setIsWaiting] = useState(true);
-  const [choosenNurseName, setChoosenNurseName] = useState();
+  const [choosenNurseName, setChoosenNurseName] = useState("");
 
 
   const sendRequest = () => {
@@ -31,7 +31,6 @@ const NearbyNurses = () => {
       },
       { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
     ).then(res => { 
-      console.log(res.data.message);
       setIsWaiting(true);
       //setAcceptedRequest({ status: false, nurseData: {} });
     }).catch(err => {
@@ -65,7 +64,7 @@ const NearbyNurses = () => {
         {/*{acceptedRequest.status ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> : <WaitForAccept />}*/}
         {acceptedRequest.state 
     ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> 
-    : choosenNurseName 
+    : choosenNurseName !== ""
         ? <WaitForChoosen data={acceptedRequest.nurseData}/> 
         : <WaitForAccept />
 }

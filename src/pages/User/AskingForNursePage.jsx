@@ -16,8 +16,8 @@ const AskingForNurse = () => {
 
 
   return (
-    <div className='min-h-screen flex flex-col'>
-      <div className="map w-full h-[700px]" style={{backgroundImage: `url(${encodeURI(medicalPic)})`, backgroundSize: "cover", backgroundPosition: "center",}}></div>
+    <div className='h-screen flex flex-col'>
+      <div className="map w-full h-[75%]" style={{backgroundImage: `url(${encodeURI(medicalPic)})`, backgroundSize: "cover", backgroundPosition: "center",}}></div>
       <div className="asking w-full flex-grow bg-creme2 shadow-panelShadow px-4 pt-5 pb-[80px] rounded-tl-20 rounded-tr-20 mt-[-40px] flex flex-col justify-between">
         <div className="p">
           <p className='font-roboto text-darkGreen2 font-[600]'>Salut chiheb</p>

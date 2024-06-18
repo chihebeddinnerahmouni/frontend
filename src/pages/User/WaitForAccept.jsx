@@ -5,7 +5,7 @@ const WaitForAccept = () => {
 
   const { setAcceptedRequest } = useContext(UserDataContext);
   const accept = () => { 
-    setAcceptedRequest(prev => ({ nurseData: { nurseName: "Affaf Aissaoui", nurseRate: 4.5, nurseLikes: 80, nurseSpecialite: "kolch", patientClients: 90, price: 500 }, state: true }));
+    setAcceptedRequest(prev => ({ nurseData: { nurseName: "Affaf Aissaoui", nurseRate: 2.4, nurseLikes: 80, nurseSpecialite: "kolch", patientClients: 90, price: 500 }, state: true }));
   };
 
   return (

@@ -1,10 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import image from '../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../../Layout/UserLayout';
 
 
-const WaitChoosenNurse = ({data}) => {
+
+const WaitChoosenNurse = ({ data }) => {
+  
+  const { setAcceptedRequest, acceptedRequest } = useContext(UserDataContext);
+  const navigate = useNavigate();
+
+  const accepta = () => { 
+    const nurseData = acceptedRequest.nurseData;
+    setAcceptedRequest({ state: true , nurseData: nurseData });
+    navigate('/User-accepted');
+  };
+
   return (
     <div className='w-full bg-white rounded-20 shadow-panelShadow p-5 flex flex-col items-center'>
       <img src={image} className='w-[120px] h-[120px] rounded-[50%] shadow-panelShadow' />
@@ -37,6 +50,10 @@ const WaitChoosenNurse = ({data}) => {
           <span></span>
           <span></span>
         </div>
+
+      <button className='mt-6' onClick={accepta}>
+        accepta
+      </button>
 
     </div>
   )

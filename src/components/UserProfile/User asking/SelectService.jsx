@@ -18,7 +18,7 @@ const SelectService = ({ selectedService, setSelectedService, selectedSubService
   useEffect(() => {
     if (selectedService && services[selectedService]) {
       setSubServices(services[selectedService]);
-      setSelectedSubService()
+      setSelectedSubService("")
     } else {
       setSubServices([]);
     }

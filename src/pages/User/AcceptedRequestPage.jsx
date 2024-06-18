@@ -4,25 +4,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { UserDataContext } from '../../Layout/UserLayout';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const AcceptedRequest = ({data, setIsWaiting}) => {
 
   const { setAcceptedRequest } = useContext(UserDataContext);
+  const navigate = useNavigate();
   
+  // another nurse function
   const anotherNurse = () => { 
     axios.put('http://localhost:3000/patients/profile/refuse-nurse',
       {},
       { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
     ).then((res) => { 
-      console.log(res.data.message);
       setIsWaiting(false);
       setAcceptedRequest({ state: false, nurseData: {} });
     }).catch((err) => {
       console.log(err)
     });
   };
-
+  // end of another nurse function
+  
+  // ok function
+  const ok = () => {
+    setIsWaiting(false);
+    setAcceptedRequest(prev => ({ state: false, ...prev }));
+    navigate('/User-accepted');
+  };  
+  // end of ok function
 
   return (
     <div className='bg-white p-5 shadow-panelShadow rounded-20 flex flex-col items-center'>
@@ -49,7 +59,7 @@ const AcceptedRequest = ({data, setIsWaiting}) => {
         Nurse Affaf Aissaoui has accepted your request. Please wait for a call.
       </p>
 
-      <button className='w-full py-3 bg-darkGreen4 text-creme2 rounded-[10px] mt-5 shadow-panelShadow'>
+      <button className='w-full py-3 bg-darkGreen4 text-creme2 rounded-[10px] mt-5 shadow-panelShadow' onClick={ok}>
         ok
       </button>
       <button className='w-full py-3 bg-white text-darkGreen4 rounded-[10px] mt-5 border-2 border-darkGreen4 shadow-panelShadow' onClick={anotherNurse}>

@@ -7,19 +7,17 @@ export const UserDataContext = createContext();
 
 const UserLayout = ({ children }) => {
 
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState("");
    const [userLocation, setUserLocation] = useState([]);
   //const [userLocation, setUserLocation] = useState([]);
-  const [selectedService, setSelectedService] = useState();
-  const [selectedSubService, setSelectedSubService] = useState();
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedSubService, setSelectedSubService] = useState("");
   const [subServices, setSubServices] = useState([]);
-  const [nurseList, setNurseList] = useState();
+  const [nurseList, setNurseList] = useState([]);
   //const [nurseRequestName, setNurseRequestName] = useState();
   //const [isWaiting, setIsWaiting] = useState(true);
-  const [resStatus, setResStatus] = useState(200);
+  const [resStatus, setResStatus] = useState(0);
   const [acceptedRequest, setAcceptedRequest] = useState({ state: false, nurseData: {} });
-
-  console.log(acceptedRequest);
 
 
   return (
