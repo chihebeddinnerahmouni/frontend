@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import image from '../../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -15,8 +15,8 @@ const NearByNurseComp = ({ nurseName, nurseRate, nurseLikes, nurseSpecialite, pa
       setChoosenNurseName(nurseName);
       setAcceptedRequest(prev => ({ ...prev, nurseData: {nurseName: nurseName, nurseRate: nurseRate, nurseLikes: nurseLikes, nurseSpecialite: nurseSpecialite, patientClients: patientClients, price: price }}))
     }
-
-
+  
+  
   return (
       <div className={`flex items-center gap-3 w-full p-2 rounded-20 shadow-panelShadow ${choosenNurseName === nurseName ? 'bg-darkGreen2' : 'bg-white' }`} onClick={selectNurse}>
           <img src={image} className='w-[100px] h-[100px] rounded-[10px]' />

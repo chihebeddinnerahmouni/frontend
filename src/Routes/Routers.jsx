@@ -36,7 +36,6 @@ const Routers = ()=>{
 return (
 <Routes>
 <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-<Route path="/" element={<MainLayout><Home /></MainLayout>} />
 <Route path="/home" element={<MainLayout><Home /></MainLayout>} />
 <Route path="/doctors" element={<WhiteHeaderLayout><Doctors /></WhiteHeaderLayout>} />
 <Route path="/doctors/:id" element={<MainLayout><DoctorDetails/></MainLayout>} />

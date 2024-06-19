@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 const SetPosition = () => {
 
   const { setResStatus, setNurseList,setUserLocation,userLocation ,selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices } = useContext(UserDataContext);
@@ -38,6 +39,8 @@ const SetPosition = () => {
     }).then(res => {  
       setResStatus(res.status);
       setNurseList(res.data.nurseList);
+      const nurseNames = res.data.nurseList.map(nurse => nurse.nurseName);     
+      window.socket.emit('sendRequest',"chiheb" ,nurseNames)
     }).catch(err => {
       console.log(err);
     })

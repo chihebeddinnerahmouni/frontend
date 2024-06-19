@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +12,15 @@ const WaitForReaquest = () => {
 
   const navigate = useNavigate();
   const { setIsTaken, isTaken, isWork } = useContext(NurseDataContext);
-  
-  const acceptreq = () => { 
+ 
+  window.socket.on('newRequest', (data) => { 
     setIsTaken(true);
-  }
+    console.log(data);
+  });
+  
+  /*const acceptreq = () => { 
+    setIsTaken(true);
+  }*/
 
   return (
     <>
@@ -25,9 +30,9 @@ const WaitForReaquest = () => {
           <h1 className="text-2xl text-darkGreen4 my-6">Waiting for Request</h1>
           <div className="loader"></div>
         </div>
-      <button>
+        {/* <button>
         <p className="" onClick={acceptreq}>arrived request</p>
-      </button>
+  </button>*/}
     </div>
 
     <div className={`request ${isTaken ? "" : "hidden"} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >

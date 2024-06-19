@@ -41,6 +41,7 @@ const NurseInfosPage = () => {
         setImage(convertToLocalServerPath(response.data.profilePicture));
         setRate(response.data.averageRating);
         setPatientClients(response.data.patientClients);
+        window.socket.emit("ownRoom", response.data.name);
       })
       .catch((error) => {
         console.log("from prifile error ", error);
