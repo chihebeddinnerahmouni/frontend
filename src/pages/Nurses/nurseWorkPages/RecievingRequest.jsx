@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RecievingRequest = () => {
   
-  const { setIsTaken, isTaken, setRequestData } = useContext(NurseDataContext);
+  const { setIsTaken, isTaken, setRequestData, nurseData } = useContext(NurseDataContext);
   const navigate = useNavigate();
   //const [requestData, setRequestData] = useState();
   const [service, setService] = useState("");
@@ -22,6 +22,8 @@ const RecievingRequest = () => {
   const [price, setPrice] = useState("");
   const [patient, setPatient] = useState("");
   const [patientRate, setPatientRate] = useState("");
+
+  
 
 
   useEffect(() => {
@@ -57,7 +59,8 @@ const RecievingRequest = () => {
         }
       }).then((response) => { 
         toast.success(response.data.message);
-        navigate("/Nurse-accepting");
+        window.socket.emit('acceptRequest',patient ,{nurseName: nurseData.name, nurseRate: nurseData.averageRating, nurseLikes: 80, nurseSpecialite: nurseData.specialite, patientClients: nurseData.patientClients, price: 500 });
+        //navigate("/Nurse-accepting");
       })
       .catch((error) => {
         console.log("from recieving accept error ", error);

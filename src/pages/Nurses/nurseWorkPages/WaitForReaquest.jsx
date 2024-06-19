@@ -15,7 +15,6 @@ const WaitForReaquest = () => {
  
   window.socket.on('newRequest', (data) => { 
     setIsTaken(true);
-    console.log(data);
   });
   
   /*const acceptreq = () => { 
