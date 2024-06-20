@@ -23,6 +23,7 @@ const EndWork = () => {
       { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
     ).then(res => {
       console.log(res.data);
+      navigate('/Nurse-work');
     }).catch(err => { 
       console.log("from rating axios err :", err);
     });

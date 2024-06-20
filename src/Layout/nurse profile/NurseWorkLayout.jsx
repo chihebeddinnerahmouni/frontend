@@ -16,7 +16,9 @@ const NurseWorkLayout = ({ children }) => {
   const [requestData, setRequestData] = useState();
 
   const nurseData = JSON.parse(localStorage.getItem("nurseData"));
-  if(nurseData) window.socket.emit("ownRoom", nurseData.name);
+  if (nurseData) window.socket.emit("ownRoom", nurseData.name);
+  
+
 
     return (
       <>

@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RecievingRequest = () => {
   
-  const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData } = useContext(NurseDataContext);
+  const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData, setRequestData } = useContext(NurseDataContext);
   const navigate = useNavigate();
   const [service, setService] = useState("");
   const [subService, setSubService] = useState("");
@@ -36,7 +36,6 @@ useEffect(() => {
 
 
   const accept = () => { 
-    //navigate("/Nurse-accepting");
     const nurseData = JSON.parse(localStorage.getItem("nurseData"));
     axios.put("http://localhost:3000/nurses/profile/accept-request",
       {},
@@ -64,6 +63,8 @@ useEffect(() => {
       .then((response) => {
         toast.success(response.data.message);
         setIsTaken(false);
+        setRequestData();
+
        })
       .catch((error) => {
         console.log("from recieving decline error ", error);

@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import NurseWorkPageTop from "../../../components/nurseProfile/NurseWork/NurseWorkPageTop";
 import map from "../../../assets/images/map.jpg";
 import ClientInfos from "../../../components/nurseProfile/NurseWork/ClientInfos";
@@ -15,16 +15,21 @@ import RejectedByUserPage from "./RejectedByUserPage";
 
 
 const AcceptingWork = () => {
-  const { requestData, nurseLocation, setRequestData, setIsTaken } = useContext(NurseDataContext);
-  const navigate = useNavigate();
 
-  // in case user rejected this nurse
+
+  const { requestData, nurseLocation, setRequestData, setIsTaken, isTaken } = useContext(NurseDataContext);
+  const navigate = useNavigate();
+  const [isRejected, setIsRejected] = useState(false);
+  // in case user rejected this nurse 
+  if (!requestData) return <></>;
+
   useEffect(() => {
     window.socket.on('rejected nurse', (data) => { 
       console.log(data);
-      setRequestData();
+      //setRequestData();
       setIsTaken(false);
-      navigate("/Nurse-Work");
+      setIsRejected(true);
+      //navigate("/Nurse-Work");
     });
   }, []);
   
@@ -37,6 +42,7 @@ const AcceptingWork = () => {
       {},
       { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
     ).then(res => {
+      window.socket.emit('nurse end work', {patientName: requestData.patient});
       navigate("/Nurse-endWork");
     }).catch(err => { 
       console.log("from acceptingwork axios err :", err);
@@ -44,11 +50,11 @@ const AcceptingWork = () => {
   }
 
 
-  if (!requestData) return <></>;
+
 
   return (
     <>
-    <div className="main bg-creme2 flex flex-col w-full min-h-screen relative">
+      <div className={`main bg-creme2 flex flex-col w-full min-h-screen relative `} style={ isRejected ? {filter: "blur(3px) brightness(70%)", pointerEvents: "none"} : {}}>
       <MapSection photo={ map } />
 
       <div className="bg-creme2 z-2 w-full rounded-tl-20 rounded-tr-20 shadow-panelShadow px-6 pt-4 pb-20 flex-grow relative z-20 mt-[280px]">
@@ -81,8 +87,8 @@ const AcceptingWork = () => {
       </div>
     </div>
 
-      <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%]  transform -translate-x-[50%] -translate-y-[40%] z-30`}>
-          <RejectedByUserPage />
+      <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%]  transform -translate-x-[50%] -translate-y-[40%] z-30  ${isRejected ? "" : "hidden"}`}>
+        <RejectedByUserPage isRejected={isRejected} setIsRejected={setIsRejected} patientName={requestData.patient} />
       </div>
     </>
   );

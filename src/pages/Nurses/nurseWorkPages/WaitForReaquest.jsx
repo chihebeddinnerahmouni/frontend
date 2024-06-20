@@ -33,6 +33,9 @@ const WaitForReaquest = () => {
     <div className={`request ${isTaken ? "" : "hidden"} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
         <RecievingRequest />
     </div>
+      
+
+
     </>
   );
 };

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import RateComp from "../../components/UserProfile/serviceEnd/RateComp";
 import image from "../../assets/images/doctor-img01.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../../Layout/UserLayout";
 
 
 const ServiceEnd = () => {
 
+  const {acceptedRequest} = useContext(UserDataContext);
+  const data = acceptedRequest.nurseData;
+  const userData = JSON.parse(localStorage.getItem("userData"));
   const [comment, setComment] = useState("");
   const [stars, setStars] = useState(0);
   const navigate = useNavigate();
@@ -33,12 +37,12 @@ const ServiceEnd = () => {
   return (
     <div className="min-h-screen bg-creme2 flex flex-col items-center pt-12 px-4 pb-[70px]">
 
-      <p className="text-darkGreen1 font-[600]">thank you chiheb rahmouni</p>
+      <p className="text-darkGreen1 font-[600]">thank you {userData.name}</p>
 
       <div className="servicenurse flex justify-between items-center mt-6 gap-2 w-full">
         <div className="left flex items-center gap-2">
           <img src={image} className="w-[60px] rounded-20" />
-          <span className="text-darkGreen4 font-[500]">Affaf aissaoui</span>
+          <span className="text-darkGreen4 font-[500]">{data.nurseName}</span>
         </div>
         <span className="">500 dZD</span>
       </div>

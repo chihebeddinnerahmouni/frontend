@@ -8,9 +8,18 @@ import AcceptingNurseInfoComp from '../../components/UserProfile/accepting servi
 import { UserDataContext } from '../../Layout/UserLayout';
 
 
+
 const AcceptedServicePage = () => {
 
-  const { selectedSubService, selectedService  } = useContext(UserDataContext);
+  const { selectedSubService, selectedService } = useContext(UserDataContext);
+  const navigate = useNavigate();
+  
+  useEffect(() => { 
+    window.socket.on("nurse ended work", (data) => { 
+      console.log(data);
+      navigate("/User-service-end");
+    });
+  }, []);
 
   return (
     <div className='min-h-screen flex flex-col pt-12 bg-creme2'>

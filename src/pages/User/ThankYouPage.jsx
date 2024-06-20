@@ -10,7 +10,7 @@ const ThankYouPage = () => {
     const navigate = useNavigate();
 
     const done = () => { 
-        navigate('/home');
+        navigate('/user-profile');
     }
 
 
