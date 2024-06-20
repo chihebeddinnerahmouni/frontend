@@ -7,7 +7,7 @@ export const UserDataContext = createContext();
 
 const UserLayout = ({ children }) => {
 
-  const [userData, setUserData] = useState("");
+  //const [userData, setUserData] = useState("");
    const [userLocation, setUserLocation] = useState([]);
   //const [userLocation, setUserLocation] = useState([]);
   const [selectedService, setSelectedService] = useState("");
@@ -19,10 +19,16 @@ const UserLayout = ({ children }) => {
   const [resStatus, setResStatus] = useState(0);
   const [acceptedRequest, setAcceptedRequest] = useState({ state: false, nurseData: {} });
 
+  
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  if (userData) window.socket.emit("ownRoom", userData.name);
+
+  
+
 
   return (
     <div>
-      <UserDataContext.Provider value={{userData, setUserData, userLocation, setUserLocation, selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices,nurseList , setNurseList, /*nurseRequestName ,setNurseRequestName,*/ /*isWaiting ,setIsWaiting,*/ resStatus ,setResStatus, acceptedRequest, setAcceptedRequest }}>
+      <UserDataContext.Provider value={{/*userData, setUserData,*/ userLocation, setUserLocation, selectedService, setSelectedService, selectedSubService, setSelectedSubService, subServices, setSubServices,nurseList , setNurseList, /*nurseRequestName ,setNurseRequestName,*/ /*isWaiting ,setIsWaiting,*/ resStatus ,setResStatus, acceptedRequest, setAcceptedRequest }}>
           <main>
             {children}
           </main>

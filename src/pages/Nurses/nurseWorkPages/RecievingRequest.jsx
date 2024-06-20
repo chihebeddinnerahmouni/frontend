@@ -13,9 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RecievingRequest = () => {
   
-  const { setIsTaken, isTaken, setRequestData, nurseData } = useContext(NurseDataContext);
+  const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData } = useContext(NurseDataContext);
   const navigate = useNavigate();
-  //const [requestData, setRequestData] = useState();
   const [service, setService] = useState("");
   const [subService, setSubService] = useState("");
   const [distance, setDistance] = useState("");
@@ -24,33 +23,21 @@ const RecievingRequest = () => {
   const [patientRate, setPatientRate] = useState("");
 
   
+useEffect(() => {
+  if (!requestData) return;
+  setService(requestData.service);
+  setSubService(requestData.subService);
+  setDistance(requestData.distance);
+  setPrice(requestData.price);
+  setPatient(requestData.patient);
+  setPatientRate(requestData.patientRate);
+}, [requestData]);
 
 
-  useEffect(() => {
-      if (!isTaken) {
-    return;
-  }
-    axios.get("http://localhost:3000/nurses/profile/get-request", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }
-    })
-      .then((response) => {
-      setRequestData(response.data[0]);
-      setService(response.data[0].service);
-      setSubService(response.data[0].subService);
-      setDistance(response.data[0].distance);
-      setPrice(response.data[0].price);
-      setPatient(response.data[0].patient);
-      setPatientRate(response.data[0].patientRate);
-       })
-      .catch((error) => {
-        console.log("from recieving error ", error);
-      });
-   }, [isTaken]);
 
   const accept = () => { 
     //navigate("/Nurse-accepting");
+    const nurseData = JSON.parse(localStorage.getItem("nurseData"));
     axios.put("http://localhost:3000/nurses/profile/accept-request",
       {},
       {
@@ -58,9 +45,9 @@ const RecievingRequest = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         }
       }).then((response) => { 
-        toast.success(response.data.message);
+       // toast.success(response.data.message);
         window.socket.emit('acceptRequest',patient ,{nurseName: nurseData.name, nurseRate: nurseData.averageRating, nurseLikes: 80, nurseSpecialite: nurseData.specialite, patientClients: nurseData.patientClients, price: 500 });
-        //navigate("/Nurse-accepting");
+        navigate("/Nurse-accepting");
       })
       .catch((error) => {
         console.log("from recieving accept error ", error);

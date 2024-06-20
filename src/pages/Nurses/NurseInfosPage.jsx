@@ -14,7 +14,7 @@ import axios from "axios";
 
 
 const NurseInfosPage = () => {
-  const { setNurseData } = useContext(NurseDataContext);
+ // const { setNurseData } = useContext(NurseDataContext);
   const [name, setName] = useState("");
   const [specialite, setSpecialite] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +33,8 @@ const NurseInfosPage = () => {
         },
       })
       .then((response) => {
-        setNurseData(response.data);
+        //setNurseData(response.data);
+        localStorage.setItem("nurseData", JSON.stringify(response.data));
         setName(response.data.name);
         setSpecialite(response.data.specialite);
         setEmail(response.data.email);
@@ -41,7 +42,7 @@ const NurseInfosPage = () => {
         setImage(convertToLocalServerPath(response.data.profilePicture));
         setRate(response.data.averageRating);
         setPatientClients(response.data.patientClients);
-        window.socket.emit("ownRoom", response.data.name);
+        //window.socket.emit("ownRoom", response.data.name);
       })
       .catch((error) => {
         console.log("from prifile error ", error);

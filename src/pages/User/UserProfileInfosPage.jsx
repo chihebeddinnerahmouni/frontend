@@ -7,7 +7,7 @@ import convertToLocalServerPath from "../../utils/photoPathChanging";
 
 const UserProfileInfos = () => {
 
-  const { setUserData } = useContext(UserDataContext);
+  //const { setUserData } = useContext(UserDataContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,13 +23,14 @@ useEffect(() => {
         },
       })
       .then((response) => {
-        setUserData(response.data);
+        //setUserData(response.data);
+        localStorage.setItem("userData", JSON.stringify(response.data));
         setName(response.data.name);
         setEmail(response.data.email);
         setPhone(response.data.phone);
         setImage(convertToLocalServerPath(response.data.profilePicture));
         setRate(response.data.averageRating);
-        window.socket.emit("ownRoom", response.data.name);
+        //window.socket.emit("ownRoom", response.data.name);
       })
       .catch((error) => {
         console.log("from prifile error ", error);

@@ -17,14 +17,27 @@ const SetPosition = () => {
   const [isValidLocation, setIsValidLocation] = useState(false);
   const navigate = useNavigate();
 
+  //for reseting patient
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.put('http://localhost:3000/patients/profile/reset-patient',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).then(res => {
+     })
+    .catch(err => console.log("reseting patient err ",err));  
+  }, []);
 
-
-
-    useEffect(() => {
+  // for checking if the user location is valid
+  useEffect(() => {
     setIsValidLocation(userLocation && userLocation.length > 0);
-    }, [userLocation]);
+  }, [userLocation]);
   
-  //get NearBy nurses button
+  // for sending the request to the nearby nurses
   const nearbyNurses = () => { 
     navigate("/User-result");
     const token = localStorage.getItem('token');
@@ -39,8 +52,10 @@ const SetPosition = () => {
     }).then(res => {  
       setResStatus(res.status);
       setNurseList(res.data.nurseList);
-      const nurseNames = res.data.nurseList.map(nurse => nurse.nurseName);     
-      window.socket.emit('sendRequest',"chiheb" ,nurseNames)
+     /* const nurseNames = res.data.nurseList.map(nurse => nurse.nurseName);     
+      window.socket.emit('sendRequest',"chiheb" ,nurseNames)*/
+      window.socket.emit('sendRequest',"chiheb" ,res.data.nurseListNames, res.data.requestData)
+
     }).catch(err => {
       console.log(err);
     })

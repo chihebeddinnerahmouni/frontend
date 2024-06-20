@@ -66,8 +66,7 @@ const NearbyNurses = () => {
     ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> 
     : choosenNurseName !== ""
         ? <WaitForChoosen data={acceptedRequest.nurseData}/> 
-        : <WaitForAccept />
-}
+        : <WaitForAccept />}
     </div>
       
     </>

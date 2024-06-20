@@ -9,15 +9,18 @@ export const NurseDataContext = createContext();
 
 
 const NurseWorkLayout = ({ children }) => {
-  const [nurseData, setNurseData] = useState();
+ // const [nurseData, setNurseData] = useState();
   const [nurseLocation, setNurseLocation] = useState();
   const [isWork, setIsWork] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
   const [requestData, setRequestData] = useState();
 
+  const nurseData = JSON.parse(localStorage.getItem("nurseData"));
+  if(nurseData) window.socket.emit("ownRoom", nurseData.name);
+
     return (
       <>
-        <NurseDataContext.Provider value={{ nurseData, setNurseData, /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData, nurseLocation, setNurseLocation}}>
+        <NurseDataContext.Provider value={{ /*nurseData, setNurseData,*/ /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData, nurseLocation, setNurseLocation}}>
       {children.type !== NurseInfosPage && <NurseWorkPageTop />}
           <main>
             <div className={`main bg-creme2 w-full mt-[-50px] min-h-screen flex flex-col` }>

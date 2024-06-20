@@ -20,6 +20,7 @@ const AcceptedRequest = ({data, setIsWaiting}) => {
     ).then((res) => { 
       setIsWaiting(false);
       setAcceptedRequest({ state: false, nurseData: {} });
+      window.socket.emit('choose another nurse', { nurseName: data.nurseName});
     }).catch((err) => {
       console.log(err)
     });

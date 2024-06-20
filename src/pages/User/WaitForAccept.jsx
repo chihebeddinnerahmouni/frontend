@@ -1,16 +1,16 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { UserDataContext } from "../../Layout/UserLayout";
 
 const WaitForAccept = () => {
 
   const { setAcceptedRequest } = useContext(UserDataContext);
 
-  window.socket.on('requestAccepted', (nurseData) => { 
+  useEffect(() => {
+    window.socket.on('requestAccepted', (nurseData) => { 
     setAcceptedRequest(prev => ({ nurseData, state: true }));
-  });
-  /*const accept = () => { 
-    setAcceptedRequest(prev => ({ nurseData: { nurseName: "Affaf Aissaoui", nurseRate: 2.4, nurseLikes: 80, nurseSpecialite: "kolch", patientClients: 90, price: 500 }, state: true }));
-  };*/
+    });
+  }, []);
+ 
 
   return (
     <div className="bg-white p-5 shadow-panelShadow rounded-20 flex flex-col items-center gap-5">
@@ -26,9 +26,6 @@ const WaitForAccept = () => {
           <span></span>
         </div>
       </div>
-      {/*<button className="mt-5" onClick={accept}>
-        accept
-  </button>*/}
     </div>
   );
 };
