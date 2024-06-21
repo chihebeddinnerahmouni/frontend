@@ -11,9 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-const RecievingRequest = () => {
+const RecievingRequest = ({}) => {
   
-  const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData, setRequestData } = useContext(NurseDataContext);
+  const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData, setRequestData, setIsPending} = useContext(NurseDataContext);
   const navigate = useNavigate();
   const [service, setService] = useState("");
   const [subService, setSubService] = useState("");
@@ -23,8 +23,8 @@ const RecievingRequest = () => {
   const [patientRate, setPatientRate] = useState("");
 
   
-useEffect(() => {
-  if (!requestData) return;
+ useEffect(() => {
+  if (!requestData) return<></>;
   setService(requestData.service);
   setSubService(requestData.subService);
   setDistance(requestData.distance);
@@ -46,7 +46,8 @@ useEffect(() => {
       }).then((response) => { 
        // toast.success(response.data.message);
         window.socket.emit('acceptRequest',patient ,{nurseName: nurseData.name, nurseRate: nurseData.averageRating, nurseLikes: 80, nurseSpecialite: nurseData.specialite, patientClients: nurseData.patientClients, price: 500 });
-        navigate("/Nurse-accepting");
+        //navigate("/Nurse-accepting");
+        setIsPending(true);
       })
       .catch((error) => {
         console.log("from recieving accept error ", error);

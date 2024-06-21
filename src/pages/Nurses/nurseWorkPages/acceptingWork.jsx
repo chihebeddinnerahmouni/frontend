@@ -17,9 +17,9 @@ import RejectedByUserPage from "./RejectedByUserPage";
 const AcceptingWork = () => {
 
 
-  const { requestData, nurseLocation, setRequestData, setIsTaken, isTaken } = useContext(NurseDataContext);
+  const { requestData, nurseLocation, setRequestData, setIsTaken, isTaken, isRejected, setIsRejected } = useContext(NurseDataContext);
   const navigate = useNavigate();
-  const [isRejected, setIsRejected] = useState(false);
+  //const [isRejected, setIsRejected] = useState(false);
   // in case user rejected this nurse 
   if (!requestData) return <></>;
 
@@ -88,7 +88,7 @@ const AcceptingWork = () => {
     </div>
 
       <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%]  transform -translate-x-[50%] -translate-y-[40%] z-30  ${isRejected ? "" : "hidden"}`}>
-        <RejectedByUserPage isRejected={isRejected} setIsRejected={setIsRejected} patientName={requestData.patient} />
+        <RejectedByUserPage /*isRejected={isRejected} setIsRejected={setIsRejected} patientName={requestData.patient}*/ />
       </div>
     </>
   );

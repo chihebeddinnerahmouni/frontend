@@ -14,22 +14,27 @@ const NurseWorkLayout = ({ children }) => {
   const [isWork, setIsWork] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
   const [requestData, setRequestData] = useState();
+  const [isRejected, setIsRejected] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const nurseData = JSON.parse(localStorage.getItem("nurseData"));
   if (nurseData) window.socket.emit("ownRoom", nurseData.name);
   
 
+  console.log('isTaken', isTaken)
+  console.log('isPending', isPending)
+  console.log('isRejected', isRejected)
 
     return (
       <>
-        <NurseDataContext.Provider value={{ /*nurseData, setNurseData,*/ /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData, nurseLocation, setNurseLocation}}>
-      {children.type !== NurseInfosPage && <NurseWorkPageTop />}
-          <main>
-            <div className={`main bg-creme2 w-full mt-[-50px] min-h-screen flex flex-col` }>
-              {children}
-            </div>
+        <NurseDataContext.Provider value={{ /*nurseData, setNurseData,*/ /*setNurseData, requestData*/ isWork ,setIsWork, isTaken, setIsTaken, requestData, setRequestData, nurseLocation, setNurseLocation, isRejected, setIsRejected, isPending, setIsPending}}>
+            {children.type !== NurseInfosPage && <NurseWorkPageTop />}
+            <main>
+              <div className={`main bg-creme2 w-full mt-[-50px] min-h-screen flex flex-col` }>
+                {children}
+              </div>
             </main>
-      <NurseButtomNav />
+            <NurseButtomNav />
          </NurseDataContext.Provider>
           
         </>

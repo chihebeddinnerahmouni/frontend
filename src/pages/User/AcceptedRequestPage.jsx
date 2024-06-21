@@ -29,6 +29,7 @@ const AcceptedRequest = ({data, setIsWaiting}) => {
   
   // ok function
   const ok = () => {
+    window.socket.emit('i accept this nurse', { nurseName: data.nurseName });
     setIsWaiting(false);
     setAcceptedRequest(prev => ({ state: false, ...prev }));
     navigate('/User-accepted');

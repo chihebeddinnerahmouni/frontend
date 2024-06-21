@@ -1,20 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { NurseDataContext } from "../../../Layout/nurse profile/NurseWorkLayout";
 import { useContext } from "react";
 import RecievingRequest from "./RecievingRequest";
+import WaitUserConfirmation from "./WaitUserConfirmation";
+import RejectedByUserPage from "./RejectedByUserPage";
 
 
 
 const WaitForReaquest = () => {
 
-  const { setIsTaken, isTaken, isWork, setRequestData } = useContext(NurseDataContext);
- 
+  const { setIsTaken, isTaken, isWork, setRequestData, isRejected, setIsRejected, requestData, isPending, setIsPending } = useContext(NurseDataContext);
+  //const [isPending, setIsPending] = useState(false);
+
   useEffect(() => {
-    window.socket.on('newRequest', (message, requestData) => { 
-    setIsTaken(true);
-    setRequestData(requestData);
+    window.socket.on('newRequest', (message, requestData) => {
+      setIsTaken(true);
+      setRequestData(requestData);
     });
   }, []);
   
@@ -30,10 +33,24 @@ const WaitForReaquest = () => {
         </div>
     </div>
 
-    <div className={`request ${isTaken ? "" : "hidden"} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
+      {/*<div className={`request ${isTaken ? "" : "hidden"} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
         <RecievingRequest />
-    </div>
+  </div>*/}
       
+      {isTaken && !isPending && !isRejected ?
+      <div className={`request ${/*isTaken ? "" : "hidden"*/ ""} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
+        <RecievingRequest />
+      </div>: null}
+      
+      {isTaken && isPending && !isRejected?
+      <div className="waitUserConfirmation w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+          <WaitUserConfirmation />
+      </div> : null}
+      
+      {isTaken && !isPending && isRejected ?
+      <div className="userrejectedYou w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+        <RejectedByUserPage />
+      </div> : null}
 
 
     </>
