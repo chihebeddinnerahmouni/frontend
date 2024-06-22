@@ -12,6 +12,7 @@ import RejectedByUserPage from "./RejectedByUserPage";
 const WaitForReaquest = () => {
 
   const { setIsTaken, isTaken, isWork, setRequestData, isRejected, setIsRejected, requestData, isPending, setIsPending } = useContext(NurseDataContext);
+  const [isChoosen, setIsChoosen] = useState(false);
   //const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,12 @@ const WaitForReaquest = () => {
       setIsTaken(true);
       setRequestData(requestData);
     });
+
+    window.socket.on('u are choosen', (message, data) => { 
+      setIsTaken(true);
+      setRequestData(data);
+      setIsChoosen(true);
+    })
   }, []);
   
 
@@ -33,12 +40,10 @@ const WaitForReaquest = () => {
         </div>
     </div>
 
-      {/*<div className={`request ${isTaken ? "" : "hidden"} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
-        <RecievingRequest />
-  </div>*/}
+
       
-      {isTaken && !isPending && !isRejected ?
-      <div className={`request ${/*isTaken ? "" : "hidden"*/ ""} w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
+     {/*</div> {isTaken && !isPending && !isRejected ?
+      <div className={`request w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`} >
         <RecievingRequest />
       </div>: null}
       
@@ -50,7 +55,16 @@ const WaitForReaquest = () => {
       {isTaken && !isPending && isRejected ?
       <div className="userrejectedYou w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
         <RejectedByUserPage />
-      </div> : null}
+      </div> : null}*/ }
+
+      {isTaken &&
+        <div className="w-[80%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">      
+          {isPending ?
+            <WaitUserConfirmation />
+           : isRejected ? 
+            <RejectedByUserPage />
+              : <RecievingRequest isChoosen={isChoosen} setIsChoosen={setIsChoosen} />}     
+      </div>}
 
 
     </>

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import image from '../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -7,16 +7,36 @@ import { UserDataContext } from '../../Layout/UserLayout';
 
 
 
-const WaitChoosenNurse = ({ data }) => {
+const WaitChoosenNurse = ({ data, setChoosenNurseName, setIsWaiting }) => {
   
-  const { setAcceptedRequest, acceptedRequest } = useContext(UserDataContext);
+  const { setAcceptedRequest, acceptedRequest, setRequestData } = useContext(UserDataContext);
   const navigate = useNavigate();
+
+  useEffect(() => { 
+    window.socket.on('custom request accepted', () => { 
+      setAcceptedRequest({ state: true , nurseData: data });
+      navigate('/User-accepted');
+    });
+
+    window.socket.on('custom request refused', () => {
+      setRequestData();
+      setChoosenNurseName("");
+      setIsWaiting(false);
+      navigate('/User-set-position');
+     });
+  }, []);
 
   const accepta = () => { 
     const nurseData = acceptedRequest.nurseData;
     setAcceptedRequest({ state: true , nurseData: nurseData });
     navigate('/User-accepted');
   };
+
+
+
+
+
+
 
   return (
     <div className='w-full bg-white rounded-20 shadow-panelShadow p-5 flex flex-col items-center'>

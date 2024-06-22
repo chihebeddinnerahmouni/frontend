@@ -44,6 +44,7 @@ const AcceptingWork = () => {
     ).then(res => {
       window.socket.emit('nurse end work', {patientName: requestData.patient});
       navigate("/Nurse-endWork");
+      setIsTaken(false);
     }).catch(err => { 
       console.log("from acceptingwork axios err :", err);
     });
@@ -87,9 +88,9 @@ const AcceptingWork = () => {
       </div>
     </div>
 
-      <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%]  transform -translate-x-[50%] -translate-y-[40%] z-30  ${isRejected ? "" : "hidden"}`}>
+     {isRejected && <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%]  transform -translate-x-[50%] -translate-y-[40%] z-30`}>
         <RejectedByUserPage /*isRejected={isRejected} setIsRejected={setIsRejected} patientName={requestData.patient}*/ />
-      </div>
+      </div>}
     </>
   );
 }

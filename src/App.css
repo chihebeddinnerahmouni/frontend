@@ -322,6 +322,39 @@ th, td {
 /* end nurse wait for request loader*/
 
 
+/* circilar countdown */
+
+.circular-countdown {
+  width: 40px;
+  height: 40px;
+}
+
+.circular-countdown svg {
+  transform: rotate(-90deg);
+}
+
+.circular-countdown circle {
+  fill: none;
+  stroke-width: 2;
+}
+
+.circular-countdown circle:nth-child(1) {
+  stroke: #eee;
+}
+
+.circular-countdown .progress {
+  stroke: #1b7a8b;
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 113px;
+  animation: countdown 15s linear forwards;
+}
+
+@keyframes countdown {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* end circilar countdown */
 
 
 

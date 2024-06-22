@@ -21,9 +21,6 @@ const NurseWorkLayout = ({ children }) => {
   if (nurseData) window.socket.emit("ownRoom", nurseData.name);
   
 
-  console.log('isTaken', isTaken)
-  console.log('isPending', isPending)
-  console.log('isRejected', isRejected)
 
     return (
       <>

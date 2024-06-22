@@ -8,7 +8,7 @@ import { UserDataContext } from "../../Layout/UserLayout";
 
 const ServiceEnd = () => {
 
-  const {acceptedRequest} = useContext(UserDataContext);
+  const {acceptedRequest, setUserLocation, setSelectedService, setSelectedSubService, setSubServices, setNurseList, setResStatus, setAcceptedRequest, setRequestData} = useContext(UserDataContext);
   const data = acceptedRequest.nurseData;
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [comment, setComment] = useState("");
@@ -29,6 +29,14 @@ const ServiceEnd = () => {
     }).then((response) => {
       console.log(response.data.message);
       navigate("/User-thanks");
+      setUserLocation([]);
+      setSelectedService("");
+      setSelectedSubService("");
+      setSubServices([]);
+      setNurseList([]);
+      setResStatus(0);
+      setAcceptedRequest({ state: false, nurseData: {} });
+      setRequestData({});
     }).catch((error) => {
       console.log(error);
     });

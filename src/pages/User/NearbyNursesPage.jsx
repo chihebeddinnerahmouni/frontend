@@ -16,7 +16,7 @@ import axios from 'axios';
 
 const NearbyNurses = () => {
 
-  const { acceptedRequest ,nurseList ,userLocation ,selectedService ,selectedSubService, setAcceptedRequest  } = useContext(UserDataContext);
+  const { acceptedRequest ,nurseList ,userLocation ,selectedService ,selectedSubService, setAcceptedRequest , requestData } = useContext(UserDataContext);
   const [isWaiting, setIsWaiting] = useState(true);
   const [choosenNurseName, setChoosenNurseName] = useState("");
 
@@ -33,6 +33,7 @@ const NearbyNurses = () => {
     ).then(res => { 
       setIsWaiting(true);
       //setAcceptedRequest({ status: false, nurseData: {} });
+      window.socket.emit("send to choosen nurse", {requestData, choosenNurseName});
     }).catch(err => {
       console.log("sendRequest for choosen nurse error", err);
     });
@@ -60,14 +61,14 @@ const NearbyNurses = () => {
       </div>      
     </div>
 
-    <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-[40%] ${isWaiting ? '' : 'hidden' }`}>
-        {/*{acceptedRequest.status ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> : <WaitForAccept />}*/}
-        {acceptedRequest.state 
-    ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} /> 
-    : choosenNurseName !== ""
-        ? <WaitForChoosen data={acceptedRequest.nurseData}/> 
-        : <WaitForAccept />}
-    </div>
+      {isWaiting &&
+        <div className={`acceptedRequest w-[80%] absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-[40%]`}>
+        {acceptedRequest.state
+          ? <AcceptedRequest data={acceptedRequest.nurseData} setIsWaiting={setIsWaiting} />
+          : choosenNurseName !== ""
+              ? <WaitForChoosen data={acceptedRequest.nurseData} setChoosenNurseName={setChoosenNurseName} setIsWaiting={setIsWaiting} />
+            : <WaitForAccept />}
+      </div>}
       
     </>
   )

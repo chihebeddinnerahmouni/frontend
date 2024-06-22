@@ -27,17 +27,17 @@ const NearByNurseComp = ({ nurseName, nurseRate, nurseLikes, nurseSpecialite, pa
                    <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-writingGrey' } text-sm font-[500]`}>{nurseSpecialite}</span>
                 </div>
                 <div className="stats flex items-center gap-5">
-                  <div className="stat flex flex-col gap-1">
+                  <div className="stat flex flex-col gap-1 items-center">
                       <FontAwesomeIcon icon={faUsers} className={`${choosenNurseName === nurseName ? 'text-creme2' : 'text-darkGreen2' } text-sm`} />
-                      <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-darkGreen2' } text-sm`}>{nurseLikes}</span>
+                      <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-darkGreen2' } text-sm`}>{patientClients}</span>
                   </div>
-                  <div className="stat flex flex-col gap-1">
+                  <div className="stat flex flex-col gap-1 items-center">
                       <FontAwesomeIcon icon={faStar} className={`${choosenNurseName === nurseName ? 'text-creme2' : 'text-darkGreen2' } text-sm`}/>
                       <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-darkGreen2' } text-sm`}>{nurseRate}</span>
                   </div>
-                  <div className="stat flex flex-col gap-1">
+                  <div className="stat flex flex-col gap-1 items-center">
                       <FontAwesomeIcon icon={faHeart} className={`${choosenNurseName === nurseName ? 'text-creme2' : 'text-darkGreen2' } text-sm`}/>
-                      <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-darkGreen2' } text-sm`}>{patientClients}</span>
+                      <span className={`${choosenNurseName === nurseName ? 'text-[#a0a1a4]' : 'text-darkGreen2' } text-sm`}>{nurseLikes}</span>
                   </div>
                 </div>
               </div>

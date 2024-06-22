@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import image from '../../assets/images/doctor-img01.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -12,8 +12,23 @@ const AcceptedRequest = ({data, setIsWaiting}) => {
   const { setAcceptedRequest } = useContext(UserDataContext);
   const navigate = useNavigate();
   
+  let timer = null;
+ useEffect(() => { 
+     timer = setTimeout(() => {
+    window.socket.emit('i accept this nurse', { nurseName: data.nurseName });
+    setIsWaiting(false);
+    setAcceptedRequest(prev => ({ state: false, ...prev }));
+    navigate('/User-accepted');
+
+      }, 15000);
+        return () => clearTimeout(timer);
+  }, []);
+
+
+
   // another nurse function
   const anotherNurse = () => { 
+    //clearTimeout(timer);
     axios.put('http://localhost:3000/patients/profile/refuse-nurse',
       {},
       { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
@@ -29,6 +44,7 @@ const AcceptedRequest = ({data, setIsWaiting}) => {
   
   // ok function
   const ok = () => {
+   // clearTimeout(timer);
     window.socket.emit('i accept this nurse', { nurseName: data.nurseName });
     setIsWaiting(false);
     setAcceptedRequest(prev => ({ state: false, ...prev }));

@@ -9,6 +9,16 @@ const RejectedByUserPage = (/*{setIsRejected, patientName}*/) => {
 
   const { setRequestData, requestData, setIsTaken, setIsRejected } = useContext(NurseDataContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsRejected(false);
+      setIsTaken(false);
+      setRequestData();
+      navigate('/Nurse-Work');
+    }, 10000);
+   }, []);
+
   const back = () => { 
     setIsTaken(false);
     setIsRejected(false);
@@ -16,7 +26,7 @@ const RejectedByUserPage = (/*{setIsRejected, patientName}*/) => {
     navigate("/Nurse-Work");
   }
   
-  //if (!isRejected) return <p>nika a khawa</p>
+
   
 
   return (

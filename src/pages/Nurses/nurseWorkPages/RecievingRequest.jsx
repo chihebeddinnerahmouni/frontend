@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-const RecievingRequest = ({}) => {
+const RecievingRequest = ({isChoosen, setIsChoosen}) => {
   
   const { setIsTaken, /*isTaken, setRequestData,*/ nurseData, requestData, setRequestData, setIsPending} = useContext(NurseDataContext);
   const navigate = useNavigate();
@@ -37,34 +37,47 @@ const RecievingRequest = ({}) => {
 
   const accept = () => { 
     const nurseData = JSON.parse(localStorage.getItem("nurseData"));
-    axios.put("http://localhost:3000/nurses/profile/accept-request",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
-      }).then((response) => { 
-       // toast.success(response.data.message);
-        window.socket.emit('acceptRequest',patient ,{nurseName: nurseData.name, nurseRate: nurseData.averageRating, nurseLikes: 80, nurseSpecialite: nurseData.specialite, patientClients: nurseData.patientClients, price: 500 });
-        //navigate("/Nurse-accepting");
-        setIsPending(true);
-      })
-      .catch((error) => {
-        console.log("from recieving accept error ", error);
-      });
+      axios.put("http://localhost:3000/nurses/profile/accept-request",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        }).then((response) => {
+          if (!isChoosen) {
+            window.socket.emit('acceptRequest', patient, { nurseName: nurseData.name, nurseRate: nurseData.averageRating, nurseLikes: 80, nurseSpecialite: nurseData.specialite, patientClients: nurseData.patientClients, price: 500 });
+            setIsPending(true);
+          } else {
+            window.socket.emit('accept custom request', patient);
+            setIsChoosen(false);
+            navigate('/Nurse-accepting');
+          }
+        })
+        .catch((error) => {
+          console.log("from recieving accept error ", error);
+        });
   };
 
   const decline = () => {
     //setIsTaken(false);
     axios.put("http://localhost:3000/nurses/profile/refuse-request",
       {},
-      {        headers: {
+      {
+        headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }})
+        }
+      })
       .then((response) => {
-        toast.success(response.data.message);
-        setIsTaken(false);
-        setRequestData();
+        if (!isChoosen) {
+          //toast.success(response.data.message);
+          setIsTaken(false);
+          setRequestData();
+        } else {
+          setIsChoosen(false);
+          setRequestData();
+          window.socket.emit('refuse custom request', patient);
+         }
+      
 
        })
       .catch((error) => {
