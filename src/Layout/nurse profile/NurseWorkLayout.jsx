@@ -17,7 +17,7 @@ const NurseWorkLayout = ({ children }) => {
   const [isRejected, setIsRejected] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
-  const nurseData = JSON.parse(localStorage.getItem("nurseData"));
+  const nurseData = JSON.parse(localStorage.getItem("userData"));
   if (nurseData) window.socket.emit("ownRoom", nurseData.name);
   
 

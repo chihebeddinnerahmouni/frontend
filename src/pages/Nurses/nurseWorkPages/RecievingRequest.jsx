@@ -36,7 +36,7 @@ const RecievingRequest = ({isChoosen, setIsChoosen}) => {
 
 
   const accept = () => { 
-    const nurseData = JSON.parse(localStorage.getItem("nurseData"));
+    const nurseData = JSON.parse(localStorage.getItem("userData"));
       axios.put("http://localhost:3000/nurses/profile/accept-request",
         {},
         {

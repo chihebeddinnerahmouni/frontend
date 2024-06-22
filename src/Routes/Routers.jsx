@@ -11,6 +11,7 @@ import ProfileInfos from "../pages/Doctors/ProfileInfos";
 import DoctorDetails from "../pages/Doctors/DoctorsDetails";
 import SchedulesPage from "../pages/Doctors/SchedulesPage";
 import { Routes, Route } from "react-router-dom";
+import DirectionPage from "../pages/DirectionPage";
 //nurse 
 import NurseInfosPage from "../pages/Nurses/NurseInfosPage";
 import NurseWorkPage from "../pages/Nurses/nurseWorkPages/NurseWorkPage";
@@ -35,7 +36,7 @@ import AcceptedServicePage from "../pages/User/AcceptedServicePage";
 const Routers = ()=>{
 return (
 <Routes>
-<Route path="/" element={<MainLayout><Home /></MainLayout>} />
+<Route path="/" element={<DirectionPage />} />
 <Route path="/home" element={<MainLayout><Home /></MainLayout>} />
 <Route path="/doctors" element={<WhiteHeaderLayout><Doctors /></WhiteHeaderLayout>} />
 <Route path="/doctors/:id" element={<MainLayout><DoctorDetails/></MainLayout>} />
@@ -59,7 +60,7 @@ return (
 <Route path="/User-accepted" element={<UserLayout><AcceptedServicePage /></UserLayout>} />
 <Route path="/User-service-end" element={<UserLayout><ServiceEnd /></UserLayout>} />
 <Route path="/User-thanks" element={<UserLayout><ThankYouPage /></UserLayout>} />
-<Route path="/User-test" element={<UserLayout><TestPage /></UserLayout>} />
+        <Route path="/User-test" element={<TestPage />} />
 </Routes>
 );
 };

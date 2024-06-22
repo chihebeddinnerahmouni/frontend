@@ -19,17 +19,13 @@ const AcceptingWork = () => {
 
   const { requestData, nurseLocation, setRequestData, setIsTaken, isTaken, isRejected, setIsRejected } = useContext(NurseDataContext);
   const navigate = useNavigate();
-  //const [isRejected, setIsRejected] = useState(false);
-  // in case user rejected this nurse 
   if (!requestData) return <></>;
 
   useEffect(() => {
     window.socket.on('rejected nurse', (data) => { 
       console.log(data);
-      //setRequestData();
       setIsTaken(false);
       setIsRejected(true);
-      //navigate("/Nurse-Work");
     });
   }, []);
   
@@ -37,7 +33,6 @@ const AcceptingWork = () => {
 
   // work done function
   const finish = () => { 
-    //navigate("/Nurse-endWork");
     axios.put("http://localhost:3000/nurses/profile/service-end",
       {},
       { headers: { Authorization: `bearer ${localStorage.getItem('token')}` } }
