@@ -11,7 +11,7 @@ const NurseButtomNav = () => {
     const navLinks = [
         {
             title: 'Home',
-            path: '/Home',
+            path: '/Nurse-Home',
              icon: <FontAwesomeIcon icon={faHome} />
             },
             {

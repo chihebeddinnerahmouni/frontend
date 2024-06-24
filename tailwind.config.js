@@ -8,7 +8,7 @@ export const theme = {
   extend: {
     backgroundColor: ['active'],
     backgroundImage: theme => ({
-      'gradient-linear': 'linear-gradient(180deg, hsla(187, 69%, 24%, 1) 0%, hsla(188, 67%, 33%, 1) 100%)',
+      'gradient-linear': 'linear-gradient(87deg, rgba(27,122,139,1) 0%, rgba(27,122,139,1) 8%, rgba(109,194,203,1) 100%)',
       }),
     colors: {
       primaryColor: "#0067FF",
@@ -32,6 +32,7 @@ export const theme = {
     },
     boxShadow: {
       panelShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;",
+      hardShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;",
     },
     borderRadius: {
       50: "50px",
@@ -52,6 +53,7 @@ export const theme = {
     },
     boxShadow: {
       panelShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+      hardShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;",
     },
     fontSize: {
       20: "20px",
@@ -65,3 +67,4 @@ export const theme = {
   },
 };
 export const plugins = [];
+

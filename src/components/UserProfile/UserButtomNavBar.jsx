@@ -11,7 +11,7 @@ const UserButtomNavBar = () => {
     const navLinks = [
         {
             title: 'Home',
-            path: '/Home',
+            path: '/User-Home',
              icon: <FontAwesomeIcon icon={faHome} />
             },
             {

@@ -1,23 +1,14 @@
-import ProfileLayout from "../Layout/ProfileLayout";
-import MainLayout from "../Layout/MainLayout";
-import WhiteHeaderLayout from "../Layout/WhiteHeaderLayout";
-import Home from "../pages/Home";
- import Services from "../pages/Services";
- import Login from "../pages/Login";
- import Signup from "../pages/Signup";
- import Contact from "../pages/Contacts";
- import Doctors from "../pages/Doctors/Doctors";
-import ProfileInfos from "../pages/Doctors/ProfileInfos";
-import DoctorDetails from "../pages/Doctors/DoctorsDetails";
-import SchedulesPage from "../pages/Doctors/SchedulesPage";
 import { Routes, Route } from "react-router-dom";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 import DirectionPage from "../pages/DirectionPage";
+import Home from "../pages/Home";
+
 //nurse 
 import NurseInfosPage from "../pages/Nurses/NurseInfosPage";
 import NurseWorkPage from "../pages/Nurses/nurseWorkPages/NurseWorkPage";
 import AcceptingWork from "../pages/Nurses/nurseWorkPages/acceptingWork";
 import NurseWorkLayout from "../Layout/nurse profile/NurseWorkLayout";
-import NoworkPage from "../pages/Nurses/nurseWorkPages/NoworkPage";
 import RecievingRequest from "../pages/Nurses/nurseWorkPages/RecievingRequest";
 import EndWork from "../pages/Nurses/nurseWorkPages/EndWork";
 //user
@@ -25,34 +16,28 @@ import UserLayout from "../Layout/UserLayout";
 import UserProfileInfos from "../pages/User/UserProfileInfosPage";
 import AskingForNurse from "../pages/User/AskingForNursePage";
 import SetPosition from "../pages/User/SetPositionPage";
-import NearbyNurses from "../pages/User/NearbyNursesPage";
 import ServiceEnd from "../pages/User/ServiceEndPage";
 import ThankYouPage from "../pages/User/ThankYouPage";
 import NurseResultPage from "../pages/User/NurseResultPage";
-import TestPage from "../pages/User/TestPage";
 import AcceptedServicePage from "../pages/User/AcceptedServicePage";
-
+import TestPage from "../pages/User/TestPage";
 
 const Routers = ()=>{
 return (
 <Routes>
 <Route path="/" element={<DirectionPage />} />
-<Route path="/home" element={<MainLayout><Home /></MainLayout>} />
-<Route path="/doctors" element={<WhiteHeaderLayout><Doctors /></WhiteHeaderLayout>} />
-<Route path="/doctors/:id" element={<MainLayout><DoctorDetails/></MainLayout>} />
-<Route path="/login" element={<WhiteHeaderLayout><Login /></WhiteHeaderLayout>}/>
-<Route path="/register" element={<WhiteHeaderLayout><Signup/></WhiteHeaderLayout>} />
-<Route path="/contact" element={<Contact/>} />
-<Route path="/services" element={<Services/>} />
-<Route path="/docProfile" element={<ProfileLayout type="PROFILE"><ProfileInfos /></ProfileLayout>} />
-<Route path="/schedules" element={<ProfileLayout type="SCHEDULES"><SchedulesPage /></ProfileLayout>} />
-{/* nurses */}
+<Route path="/login" element={<Login />}/>
+<Route path="/register" element={<Signup/>} />
+
+        {/* nurses */}
+<Route path="/Nurse-Home" element={<NurseWorkLayout><Home /></NurseWorkLayout>} />
 <Route path="/Nurse-Profile" element={<NurseWorkLayout><NurseInfosPage /></NurseWorkLayout>} />
 <Route path="/Nurse-work" element={<NurseWorkLayout><NurseWorkPage  /></NurseWorkLayout>} />
 <Route path="/Nurse-recieving" element={<NurseWorkLayout><RecievingRequest  /></NurseWorkLayout>} />
 <Route path="/Nurse-accepting" element={<NurseWorkLayout><AcceptingWork /></NurseWorkLayout>} />
 <Route path="/Nurse-endWork" element={<NurseWorkLayout><EndWork /></NurseWorkLayout>} />
-{/* user */}
+        {/* user */}
+<Route path="/User-Home" element={<UserLayout><Home /></UserLayout>} />
 <Route path="/User-Profile" element={<UserLayout><UserProfileInfos /></UserLayout>} />
 <Route path="/User-asking" element={<UserLayout><AskingForNurse /></UserLayout>} />
 <Route path="/User-set-position" element={<UserLayout><SetPosition /></UserLayout>} />
@@ -60,7 +45,7 @@ return (
 <Route path="/User-accepted" element={<UserLayout><AcceptedServicePage /></UserLayout>} />
 <Route path="/User-service-end" element={<UserLayout><ServiceEnd /></UserLayout>} />
 <Route path="/User-thanks" element={<UserLayout><ThankYouPage /></UserLayout>} />
-        <Route path="/User-test" element={<TestPage />} />
+<Route path="/User-test" element={<UserLayout><TestPage /></UserLayout>} />
 </Routes>
 );
 };
