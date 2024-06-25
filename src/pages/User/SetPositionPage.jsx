@@ -70,10 +70,7 @@ const SetPosition = () => {
         <SelectService selectedService={selectedService} setSelectedService={setSelectedService} selectedSubService={selectedSubService} setSelectedSubService={setSelectedSubService} subServices={subServices} setSubServices={setSubServices}/>
         <div className="position mt-6 w-full relative flex items-center">
           <FontAwesomeIcon icon={faMapPin} className='absolute text-darkGreen4 left-4'/>
-          <input type="text" placeholder='position' className='location appearance-none shadow-panelShadow rounded-20 text-sm py-2 pl-10 w-full outline-none text-darkGreen1 focus:ring-1 focus:ring-darkGreen4' value={userLocation || ''}  onChange={e => {
-    const parts = e.target.value.split(',').map(Number);
-            setUserLocation(parts);
-  }}/>
+          <input type="text" placeholder='position' className='location appearance-none shadow-panelShadow rounded-20 text-sm py-2 pl-10 w-full outline-none text-darkGreen1 focus:ring-1 focus:ring-darkGreen4' value={userLocation || ''}  onChange={e => {const parts = e.target.value.split(',').map(Number); setUserLocation(parts);}}/>
         </div>  
       </div>
 

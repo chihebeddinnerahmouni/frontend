@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMap } from "@fortawesome/free-regular-svg-icons";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { UserDataContext } from "../../../Layout/UserLayout";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,7 +11,7 @@ const PositionOptions = ({setUserLocation}) => {
 
   const [selectedOption, setSelectedOption] = useState();
   //const { setUserLocation } = useContext(UserDataContext);
-
+  const navigate = useNavigate();
 
   const option1 = () => { 
     setSelectedOption("option1");
@@ -19,6 +20,10 @@ const PositionOptions = ({setUserLocation}) => {
     });
   }
 
+  const option2 = () => { 
+    setSelectedOption("option2");
+    navigate("/User-map");
+   }
 
 
 
@@ -41,7 +46,7 @@ const PositionOptions = ({setUserLocation}) => {
       <hr className="border-t-2 border-darkGreen1 my-3 w-[95%] self-end" />
       <div className={`option2 flex items-center gap-3  text-sm ${selectedOption === 'option2' ?  'text-darkGreen4' : 'text-darkGreen1'}`}>
         <FontAwesomeIcon icon={faMap} className="" />
-      <button className={`text-sm ${selectedOption === 'option2' ?  'text-darkGreen3' : 'text-darkGreen1'}`} onClick={()=>setSelectedOption("option2")}>
+      <button className={`text-sm ${selectedOption === 'option2' ?  'text-darkGreen3' : 'text-darkGreen1'}`} onClick={option2}>
           Selectionner sur le map
         </button>
       </div>
